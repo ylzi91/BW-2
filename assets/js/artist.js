@@ -1,39 +1,31 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const artistId = urlParams.get('id');
-    const artistDetails = document.getElementById('artist-details');
-    const artistAlbums = document.getElementById('artist-albums');
+    const apiUrl = `https://striveschool-api.herokuapp.com/api/deezer/artist/${artistId}`;
+    const artistContainer = document.getElementById('artist-details');
 
-    fetch(`https://striveschool-api.herokuapp.com/api/deezer/artist/${artistId}`)
+    function createAlbumElement(album) {
+        const albumDiv = document.createElement('div');
+        albumDiv.className = 'album';
+        albumDiv.innerHTML = `
+            <img src="${album.cover}" alt="${album.title}">
+            <h4>${album.title}</h4>
+            <a href="album.html?id=${album.id}">View Details</a>
+        `;
+        return albumDiv;
+    }
+
+    fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-            // Display artist details
-            artistDetails.innerHTML = `
-                <img src="${data.picture_xl}" alt="${data.name}">
-                <h2>${data.name}</h2>
-                <p>Top Tracks</p>
+            const artist = data;
+            artistContainer.innerHTML = `
+                <h1>${artist.name}</h1>
+                <img src="${artist.picture}" alt="${artist.name}">
+                <div class="albums">
+                    ${artist.albums.data.map(album => createAlbumElement(album).outerHTML).join('')}
+                </div>
             `;
-
-            // Display artist albums
-            fetch(data.tracklist)
-                .then(response => response.json())
-                .then(trackData => {
-                    artistAlbums.innerHTML = ''; // Clear previous results
-                    trackData.data.forEach(track => {
-                        const albumItem = document.createElement('div');
-                        albumItem.className = 'album-item';
-                        albumItem.innerHTML = `
-                            <img src="${track.album.cover_medium}" alt="${track.album.title}">
-                            <h4>${track.album.title}</h4>
-                            <p>${track.album.artist.name}</p>
-                        `;
-                        albumItem.addEventListener('click', () => {
-                            window.location.href = `album.html?id=${track.album.id}`;
-                        });
-                        artistAlbums.appendChild(albumItem);
-                    });
-                })
-                .catch(error => console.error('Error fetching artist albums:', error));
         })
-        .catch(error => console.error('Error fetching artist:', error));
+        .catch(error => console.error('Error:', error));
 });

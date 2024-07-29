@@ -1,56 +1,34 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const albumId = urlParams.get('id');
-    const albumDetails = document.getElementById('album-details');
-    const trackList = document.getElementById('track-list');
-    const player = document.getElementById('player');
+    const apiUrl = `https://striveschool-api.herokuapp.com/api/deezer/album/${albumId}`;
+    const albumContainer = document.getElementById('album-details');
 
-    fetch(`https://striveschool-api.herokuapp.com/api/deezer/album/${albumId}`)
+    function createTrackElement(track) {
+        const trackDiv = document.createElement('div');
+        trackDiv.className = 'track';
+        trackDiv.innerHTML = `
+            <div class="track-info">
+                <h4>${track.title}</h4>
+                <p>${track.artist.name}</p>
+            </div>
+            <button class="play" data-id="${track.id}">Play</button>
+        `;
+        return trackDiv;
+    }
+
+    fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-            // Display album details
-            albumDetails.innerHTML = `
-                <img src="${data.cover_xl}" alt="${data.title}">
-                <h2>${data.title}</h2>
-                <p>${data.artist.name}</p>
-                <p>Released on: ${data.release_date}</p>
-                <p>${data.nb_tracks} Tracks</p>
+            const album = data;
+            albumContainer.innerHTML = `
+                <h1>${album.title}</h1>
+                <img src="${album.cover}" alt="${album.title}">
+                <p>By ${album.artist.name}</p>
+                <div class="tracklist">
+                    ${album.tracks.data.map(track => createTrackElement(track).outerHTML).join('')}
+                </div>
             `;
-
-            // Display tracks
-            fetch(data.tracklist)
-                .then(response => response.json())
-                .then(trackData => {
-                    trackList.innerHTML = ''; // Clear previous results
-                    trackData.data.forEach(track => {
-                        const trackItem = document.createElement('div');
-                        trackItem.className = 'track-item';
-                        trackItem.innerHTML = `
-                            <p>${track.title}</p>
-                            <button onclick="playTrack('${track.preview}')">Play Preview</button>
-                        `;
-                        trackItem.addEventListener('click', () => {
-                            player.innerHTML = `
-                                <audio controls>
-                                    <source src="${track.preview}" type="audio/mpeg">
-                                    Your browser does not support the audio element.
-                                </audio>
-                                <p>${track.title} - ${track.artist.name}</p>
-                            `;
-                        });
-                        trackList.appendChild(trackItem);
-                    });
-                })
-                .catch(error => console.error('Error fetching tracks:', error));
         })
-        .catch(error => console.error('Error fetching album:', error));
-
-    window.playTrack = (previewUrl) => {
-        player.innerHTML = `
-            <audio controls>
-                <source src="${previewUrl}" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-        `;
-    };
+        .catch(error => console.error('Error:', error));
 });

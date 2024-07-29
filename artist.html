@@ -4,25 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artist Details</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <a href="index.html">Back to Homepage</a>
-    </header>
-    <main>
-        <section id="artist-details">
-            <!-- Artist details will be dynamically inserted here -->
-        </section>
-        <section id="artist-albums">
-            <!-- Artist's albums will be dynamically inserted here -->
-        </section>
-    </main>
-    <footer>
-        <div id="player">
-            <!-- Player controls go here -->
+    <div class="sidebar">
+        <!-- Sidebar content same as index.html -->
+    </div>
+
+    <div class="main-container">
+        <div id="artist-details">
+            <!-- Artist details will be inserted here -->
         </div>
-    </footer>
-    <script src="./assets/js/artist.js"></script>
+    </div>
+
+    <div class="preview">
+        <div class="text">
+            <h6>Preview of Spotify</h6>
+            <p>Sign up to get unlimited songs and podcasts with occasional ads. No credit card needed.</p>
+        </div>
+        <div class="button">
+            <button type="button">Sign up free</button>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/23cecef777.js" crossorigin="anonymous"></script>
+    <script src="./assets/js/home.js"></script>
+    <script src="./assets/js/player.js"></script>
+    <script src="./assets/js/search.js"></script>
+    <script src="./assets/js/album.js"></script>
 </body>
 </html>
