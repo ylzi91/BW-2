@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW8cfUKg2tW2S3ZZjIlRmVE_WwOfTkPbzc_g&s">
+    <title>Spotify</title>
     <link rel="stylesheet" href="./assets/css/circular-font.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
@@ -29,8 +30,8 @@
               </a>
             </li>
 
-            <li>
-              <a href="#">
+            <li id = "searchButton">
+              <a>
                 <span class="fa fa-search"></span>
                 <span>Cerca</span>
               </a>
@@ -172,7 +173,10 @@
             <button type="button" class="fa fas fa-chevron-left"></button>
             <button type="button" class="fa fas fa-chevron-right"></button>
           </div>
-          <div>
+          <div class = "searchLabel">
+            <input class="hidden" type="text" id="searchInput" placeholder="Cerca..." />
+          </div>
+          <div class="userSpoty">
             <div class="imgtop">
               <img src="./assets/imgs/main/image-1.jpg" alt="" />
             </div>
@@ -181,166 +185,92 @@
         </div>
 
         <div class="hero">
-          <div class="heroImg">
-            <img src="./assets/imgs/main/image-17.jpg" alt="" />
-          </div>
-          <div class="central">
-            <p>Album</p>
-            <h1>Viola</h1>
-            <p>Fedez</p>
-            <p>Ascoltalo subbbbbito</p>
-            <div>
-              <button>Play</button>
-              <button>Salva</button>
-              <span>. . .</span>
-            </div>
-          </div>
-          <div class="annunced"><span>Nascondi annunci</span></div>
+          
         </div>
 
         <div class="spotify-playlists">
           <h2>Buonasera</h2>
 
           <div class="albumSilenteList">
-            <div class="albumSilente">
-              <img
-                src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db"
-              />
-              <h5>Today's Top Hits</h5>
-            </div>
-            <div class="albumSilente">
-              <img
-                src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db"
-              />
-              <h5>Today's Top Hits</h5>
-            </div>
-            <div class="albumSilente">
-              <img
-                src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db"
-              />
-              <h5>Today's Top Hits</h5>
-            </div>
-            <div class="albumSilente">
-              <img
-                src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db"
-              />
-              <h5>Today's Top Hits</h5>
-            </div>
-            <div class="albumSilente">
-              <img
-                src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db"
-              />
-              <h5>Today's Top Hits</h5>
-            </div>
-            <div class="albumSilente">
-              <img
-                src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db"
-              />
-              <h5>Today's Top Hits</h5>
-            </div>
+            
             
           </div>
         </div>
 
         <div class="spotify-playlists">
-          <h2>Altro di ciò che ti piace</h2>
+          <h2>Artisti che ti potrebbero piacere</h2>
           <div class="list">
-            <div class="item">
-              <img
-                src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db"
-              />
-              <div class="play">
-                <span class="fa fa-play"></span>
-              </div>
-              <h4>Peaceful Piano</h4>
-              <p>Relax and indulge with beautiful piano pieces</p>
-            </div>
-
-            <div class="item">
-              <img
-                src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db"
-              />
-              <div class="play">
-                <span class="fa fa-play"></span>
-              </div>
-              <h4>Deep Focus</h4>
-              <p>Keep calm and focus with ambient and pos...</p>
-            </div>
-
-            <div class="item">
-              <img
-                src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db"
-              />
-              <div class="play">
-                <span class="fa fa-play"></span>
-              </div>
-              <h4>Instrumental Study</h4>
-              <p>Focus with soft study music in the...</p>
-            </div>
-
-            <div class="item">
-              <img
-                src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db"
-              />
-              <div class="play">
-                <span class="fa fa-play"></span>
-              </div>
-              <h4>chill lofi study beats</h4>
-              <p>The perfect study beats, twenty four...</p>
-            </div>
-
-            <div class="item">
-              <img
-                src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db"
-              />
-              <div class="play">
-                <span class="fa fa-play"></span>
-              </div>
-              <h4>Coding Mode</h4>
-              <p>Dedicated to all the programmers out there.</p>
-            </div>
-
-            <div class="item">
-              <img
-                src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db"
-              />
-              <div class="play">
-                <span class="fa fa-play"></span>
-              </div>
-              <h4>Focus Flow</h4>
-              <p>Uptempo instrumental hip hop beats.</p>
-            </div>
-
-            <div class="item">
-              <img
-                src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db"
-              />
-              <div class="play">
-                <span class="fa fa-play"></span>
-              </div>
-              <h4>Calm Before The Storm</h4>
-              <p>Calm before the storm music.</p>
-            </div>
-
-            <div class="item">
-              <img
-                src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db"
-              />
-              <div class="play">
-                <span class="fa fa-play"></span>
-              </div>
-              <h4>Beats to think to</h4>
-              <p>Focus with deep techno and tech house.</p>
-            </div>
+            
           </div>
+          <h2>Album che ti potrebbero piacere</h2>
+          <div class="list">
+            
+          </div>
+
+
         </div>
 
         </div>
     </div>
 
+    <footer class="hidden">
+      <audio id="audioPlayer" name="media">
+        
+      </audio>
+      <div class="music-player">
+        <div class="song-bar">
+            <div class="song-infos">
+                <div class="image-container">
+                    <img id="imgPlayer"  alt="" />
+                </div>
+                <div class="song-description">
+                    <p class="title" id="titlePlayer">
+                        
+                    </p>
+                    <p class="artist" id="artistPlayer"></p>
+                </div>
+            </div>
+            <div class="icons">
+                <i class="far fa-heart"></i>
+                <i class="fas fa-compress"></i>
+            </div>
+        </div>
+        <div class="progress-controller">
+            <div class="control-buttons">
+                <i class="fas fa-random"></i>
+                <i class="fas fa-step-backward" id="backward"></i>
+                <i class="play-pause fas fa-play" id="playPause"></i>
+                <i class="fas fa-step-forward" id ="forward"></i>
+                <i class="fas fa-undo-alt"></i>
+            </div>
+            <div class="progress-container">
+              <span id="currentTime">
+              </span>
+                  <input type="range" class="custom-progress-bar" id="progressBar" min="0" max="100" value="0">
+                   
+                  <span id="duration">
+                  </span>
+        
+            </div>
+        </div>
+        <div class="other-features">
+            <i class="fas fa-list-ul"></i>
+            <i class="fas fa-desktop"></i>
+            <div class="volume-bar">
+                <i class="fas fa-volume-down"></i>
+                <div class="progress-bar">
+                  <input type="range" class="custom-volume-bar" id="volumeBar" min="0" max="100" value="50">
+                </div>
+            </div>
+        </div>
+    </div>
+    </footer>
+
     <script
       src="https://kit.fontawesome.com/23cecef777.js"
       crossorigin="anonymous"
     ></script>
+    <script src="./assets/js/home.js"></script>
+    <script src = "./assets/js/search.js" ></script>
   </body>
 </html>

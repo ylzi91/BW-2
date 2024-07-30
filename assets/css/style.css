@@ -8,6 +8,47 @@ body {
   color: white;
   font-family: "Circular";
 }
+a {
+  text-decoration: none;
+  color: white;
+}
+
+#searchButton {
+  cursor: pointer;
+}
+
+.searchLabel{
+  width: 30%;
+}
+#searchInput {
+  width: 100%;
+  border: none;
+  background-color: #3c3c3c;
+  color: white;
+  border-radius: 60px;
+  height: 4vh;
+  padding: 10px;
+}
+
+#searchInput:focus {
+  outline: none;
+  border: 1px solid whitesmoke;
+}
+
+
+
+
+.hidden {
+  display: none;
+}
+
+
+
+.userSpoty{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
 
 #container {
   display: flex;
@@ -200,10 +241,14 @@ body {
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  max-width: 50%;
 }
 
 .central h1 {
   font-size: 4em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .hero button {
   background-color: #1db954;
@@ -256,7 +301,12 @@ body {
 }
 
 .annunced {
+  flex-grow: 1;
+  text-align: center;
   align-self: start;
+}
+
+.annunced span {
   color: rgba(255, 255, 255, 0.377);
   padding: 2px 10px;
   border: 1px solid rgba(255, 255, 255, 0.176);
@@ -276,6 +326,7 @@ body {
   display: flex;
   gap: 20px;
   overflow: scroll;
+  margin-bottom: 20px;
 }
 
 .spotify-playlists .albumSilenteList {
@@ -383,4 +434,180 @@ body {
   border: 0px;
   border-radius: 40px;
   cursor: pointer;
+}
+
+
+
+video {
+  height: 50px;
+}
+
+@import url(//db.onlinewebfonts.com/c/860c3ec7bbc5da3e97233ccecafe512e?family=Circular+Std+Book);
+
+* {
+    box-sizing: border-box;
+    font-family: "circular std book", sans-serif;
+}
+
+footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+.music-player {
+    --primary-color: #ddd;
+    --secondary-color: #999;
+    --green-color: #2d5;
+    --padding: 1em;
+    background-color: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    height: 7rem;
+    padding: var(--padding);
+    color: var(--primary-color);
+}
+i{
+    color: var(--secondary-color);
+}
+i:hover{
+    color: var(--primary-color);
+}
+.song-bar {
+    position: absolute;
+    left: var(--padding);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.5rem;
+    width: 25%;
+}
+
+.song-infos {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+.image-container {
+    --size: 4.5em;
+    flex-shrink: 0;
+    width: var(--size);
+    height: var(--size);
+}
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.song-description p {
+    margin: 0.2em;
+}
+.title,
+.artist {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+.title:hover,
+.artist:hover {
+    text-decoration: underline;
+}
+.artist{
+    color: var(--secondary-color);
+}
+.icons{
+    display: flex;
+    gap: 1em;
+}
+.progress-controller{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5em;
+    color: var(--secondary-color);
+}
+.control-buttons{
+    display: flex;
+    align-items: center;
+    gap: 2em;
+}
+.play-pause{
+    display: inline-block;
+    padding: 1em;
+    background-color: var(--primary-color);
+    color: #111;
+    border-radius: 50%;
+}
+.play-pause:hover{
+    transform: scale(1.1);
+    color: #111;
+}
+.progress-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+
+
+.custom-progress-bar {
+   /* Rimuove l'aspetto predefinito */
+  width: 30%;
+  height: 8px; /* Altezza della barra di progresso */
+  background: #ccc; /* Colore dello sfondo grigio */
+  outline: none; /* Rimuove il bordo esterno */
+  border-radius: 5px; /* Bordo arrotondato */
+  overflow: hidden; /* Nasconde il contenuto che supera i bordi */
+}
+
+.custom-volume-bar{
+  width: 100%;
+  height: 8px; /* Altezza della barra di progresso */
+  background: #ccc; /* Colore dello sfondo grigio */
+  outline: none; /* Rimuove il bordo esterno */
+  border-radius: 5px; /* Bordo arrotondato */
+  overflow: hidden; /
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.other-features{
+    position: absolute;
+    right: var(--padding);
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+.volume-bar{
+    display: flex;
+    align-items: center;
+    gap: .7em;
+}
+.volume-bar .progress-bar{
+    width: 6em;
+}
+.volume-bar .progress-bar:hover .progress::after{
+    --size: .8em;
 }
