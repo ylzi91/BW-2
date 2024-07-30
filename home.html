@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW8cfUKg2tW2S3ZZjIlRmVE_WwOfTkPbzc_g&s">
+    <title>Spotify</title>
     <link rel="stylesheet" href="./assets/css/circular-font.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
@@ -34,10 +35,6 @@
                 <span class="fa fa-search"></span>
                 <span>Cerca</span>
               </a>
-                <div class="hidden">
-                  <input type="text" id="searchInput" placeholder="Cerca..." />
-                </div>
-                <div class="search-results" id="searchResults"></div>
             </li>
 
             <li>
@@ -176,7 +173,10 @@
             <button type="button" class="fa fas fa-chevron-left"></button>
             <button type="button" class="fa fas fa-chevron-right"></button>
           </div>
-          <div>
+          <div class = "searchLabel">
+            <input class="hidden" type="text" id="searchInput" placeholder="Cerca..." />
+          </div>
+          <div class="userSpoty">
             <div class="imgtop">
               <img src="./assets/imgs/main/image-1.jpg" alt="" />
             </div>
@@ -198,14 +198,73 @@
         </div>
 
         <div class="spotify-playlists">
-          <h2>Altro di ciò che ti piace</h2>
+          <h2>Artisti che ti potrebbero piacere</h2>
           <div class="list">
             
           </div>
+          <h2>Album che ti potrebbero piacere</h2>
+          <div class="list">
+            
+          </div>
+
+
         </div>
 
         </div>
     </div>
+
+    <footer class="hidden">
+      <audio id="audioPlayer" name="media">
+        
+      </audio>
+      <div class="music-player">
+        <div class="song-bar">
+            <div class="song-infos">
+                <div class="image-container">
+                    <img id="imgPlayer"  alt="" />
+                </div>
+                <div class="song-description">
+                    <p class="title" id="titlePlayer">
+                        
+                    </p>
+                    <p class="artist" id="artistPlayer"></p>
+                </div>
+            </div>
+            <div class="icons">
+                <i class="far fa-heart"></i>
+                <i class="fas fa-compress"></i>
+            </div>
+        </div>
+        <div class="progress-controller">
+            <div class="control-buttons">
+                <i class="fas fa-random"></i>
+                <i class="fas fa-step-backward" id="backward"></i>
+                <i class="play-pause fas fa-play" id="playPause"></i>
+                <i class="fas fa-step-forward" id ="forward"></i>
+                <i class="fas fa-undo-alt"></i>
+            </div>
+            <div class="progress-container">
+              <span id="currentTime">
+              </span>
+                  <input type="range" class="custom-progress-bar" id="progressBar" min="0" max="100" value="0">
+                   
+                  <span id="duration">
+                  </span>
+        
+            </div>
+        </div>
+        <div class="other-features">
+            <i class="fas fa-list-ul"></i>
+            <i class="fas fa-desktop"></i>
+            <div class="volume-bar">
+                <i class="fas fa-volume-down"></i>
+                <div class="progress-bar">
+                  <input type="range" class="custom-volume-bar" id="volumeBar" min="0" max="100" value="50">
+                </div>
+            </div>
+        </div>
+    </div>
+    </footer>
 
     <script
       src="https://kit.fontawesome.com/23cecef777.js"
