@@ -138,7 +138,7 @@
                     
                   </div>
                   <div class="riga-titolo d-flex flex-column justify-content-center ">
-                    <p class="m-0 fw-light ">${track.title}</p>
+                    <p class="m-0 fw-light " onclick = "playSong(${index}, event)">${track.title}</p>
                     <p class="m-0  fw-light gray ">${track.artist.name}</p>
                   </div>
                   <div class="riga-rip d-flex justify-content-end align-items-center"> <p class="m-0 fw-light ">${track.rank}</p></div>
@@ -203,29 +203,7 @@
       // Carica 10 album a partire dall'ID specificato
       loadAlbums(myId, numberOfAlbums);
     
-      const searchButton = document.getElementById("searchButton");
-      const searchBar = document.getElementsByClassName("hidden")[0];
-      const searchInput = document.getElementById("searchInput");
-    
-      searchButton.addEventListener("click", () => {
-        searchBar.classList.toggle("hidden");
-        if (!searchBar.classList.contains("hidden")) {
-          searchInput.focus();
-        } else {
-          searchInput.value = "";
-        }
-      });
-    
-      searchInput.addEventListener("keyup", async (event) => {
-        if (event.key === "Enter") {
-          const query = searchInput.value.trim();
-          if (query) {
-            await loadAlbums(query, 6);
-          }
-        }
-      });
-    
-    
+     
     });
     
     function playSong(index){
@@ -240,10 +218,10 @@
       const durationSpan = document.getElementById("duration");
       const volumerBar = document.getElementById("volumeBar");
       videoPlayer.volume = volumerBar.value / 100;
-    
-      const footer = document.getElementsByTagName('footer')[0]
-        footer.classList.remove('hidden')
-    
+    const play = document.getElementById('play')
+            play.style.display="block"
+            const imgPlayer = document.getElementById('imgPlayer')
+            imgPlayer.setAttribute('src', `${traksArray[index].album.cover_medium}`)
         const artistPlayer = document.getElementById('artistPlayer')
         artistPlayer.innerText = `${traksArray[index].artist.name}`
       
@@ -253,52 +231,51 @@
         playPauseButton.classList.remove("fa-play");
         playPauseButton.classList.add("fa-pause");
     
-    
-      playPauseButton.addEventListener("click", () => {
-        if (videoPlayer.paused) {
-            console.log('entra per play')
-          videoPlayer.play();
-          playPauseButton.classList.remove("fa-play");
-          playPauseButton.classList.add("fa-pause");
-        } else if(videoPlayer.played) {
-            console.log('entra per pausa')
-          videoPlayer.pause();
-          playPauseButton.classList.remove("fa-pause");
-          playPauseButton.classList.add("fa-play");
+        playPauseButton.addEventListener('click', () => {
+          if (videoPlayer.paused) {
+            videoPlayer.play();
+            playPauseButton.classList.remove('fa-play');
+            playPauseButton.classList.add('fa-pause');
+          } else {
+            videoPlayer.pause();
+            playPauseButton.classList.remove('fa-pause');
+            playPauseButton.classList.add('fa-play');
+          }
+        });
+      
+        backwardButton.addEventListener('click', () => {
+          videoPlayer.currentTime -= 10;
+        });
+      
+        forwardButton.addEventListener('click', () => {
+          videoPlayer.currentTime += 10;
+        });
+      
+        videoPlayer.addEventListener('timeupdate', () => {
+          const progress = (videoPlayer.currentTime / videoPlayer.duration) * 100;
+          progressBar.value = progress;
+          currentTimeSpan.textContent = formatTime(videoPlayer.currentTime);
+        });
+      
+        videoPlayer.addEventListener('loadedmetadata', () => {
+          durationSpan.textContent = formatTime(videoPlayer.duration);
+        });
+      
+        progressBar.addEventListener('input', () => {
+          const newTime = (progressBar.value / 100) * videoPlayer.duration;
+          videoPlayer.currentTime = newTime;
+        });
+      
+        volumerBar.addEventListener('input', () => {
+          videoPlayer.volume = volumerBar.value / 100
+        })
+      
+      
+        function formatTime(seconds) {
+          const minutes = Math.floor(seconds / 60);
+          const secs = Math.floor(seconds % 60);
+          return `${minutes}:${secs < 10 ? '0' : ''}${secs}`
         }
-      });
-    
-      backwardButton.addEventListener("click", () => {
-        videoPlayer.currentTime -= 10;
-      });
-    
-      forwardButton.addEventListener("click", () => {
-        videoPlayer.currentTime += 10;
-      });
-    
-      videoPlayer.addEventListener("timeupdate", () => {
-        const progress = (videoPlayer.currentTime / videoPlayer.duration) * 100;
-        progressBar.value = progress;
-        currentTimeSpan.textContent = formatTime(videoPlayer.currentTime);
-      });
-    
-      videoPlayer.addEventListener("loadedmetadata", () => {
-        durationSpan.textContent = formatTime(videoPlayer.duration);
-      });
-    
-      progressBar.addEventListener("input", () => {
-        const newTime = (progressBar.value / 100) * videoPlayer.duration;
-        videoPlayer.currentTime = newTime;
-      });
-    
-      volumerBar.addEventListener("input", () => {
-        videoPlayer.volume = volumerBar.value / 100;
-      });
-    
-      function formatTime(seconds) {
-        const minutes = Math.floor(seconds / 60);
-        const secs = Math.floor(seconds % 60);
-        return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
-      }
+      
     
     }
