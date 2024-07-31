@@ -561,6 +561,8 @@ i:hover{
 
 
 .custom-progress-bar {
+  -webkit-appearance: none;
+  appearance: none;
    /* Rimuove l'aspetto predefinito */
   width: 30%;
   height: 8px; /* Altezza della barra di progresso */
@@ -570,7 +572,28 @@ i:hover{
   overflow: hidden; /* Nasconde il contenuto che supera i bordi */
 }
 
+.custom-progress-bar::-webkit-slider-runnable-track {
+  height: 20px;
+  background: #313030;
+  border-radius: 16px;
+}
+
+.custom-progress-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+
+  height: 20px;
+  width: 15px;
+  background-color: #1AB26B;
+  border-radius: 50%;
+  border: 2px solid #1AB26B;
+
+  box-shadow: -407px 0 0 400px #1AB26B;
+}
+
 .custom-volume-bar{
+  -webkit-appearance: none;
+  appearance: none;
   width: 100%;
   height: 8px; /* Altezza della barra di progresso */
   background: #ccc; /* Colore dello sfondo grigio */
@@ -578,6 +601,25 @@ i:hover{
   border-radius: 5px; /* Bordo arrotondato */
   overflow: hidden; /
 
+}
+
+.custom-volume-bar::-webkit-slider-runnable-track {
+  height: 20px;
+  background: #313030;
+  border-radius: 16px;
+}
+
+.custom-volume-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+
+  height: 20px;
+  width: 15px;
+  background-color: #1AB26B;
+  border-radius: 50%;
+  border: 2px solid #1AB26B;
+
+  box-shadow: -407px 0 0 400px #1AB26B;
 }
 
 
