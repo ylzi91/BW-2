@@ -581,18 +581,6 @@ i:hover{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 .other-features{
     position: absolute;
     right: var(--padding);
@@ -603,11 +591,11 @@ i:hover{
 .volume-bar{
     display: flex;
     align-items: center;
-    gap: .7em;
+    gap: 0.7em;
 }
 .volume-bar .progress-bar{
     width: 6em;
 }
 .volume-bar .progress-bar:hover .progress::after{
-    --size: .8em;
+    --size: 0.8em;
 }
