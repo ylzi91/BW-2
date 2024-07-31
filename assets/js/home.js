@@ -24,7 +24,12 @@
   } */
 
 
-
+    function goAlbum(id){
+      window.open(`./album.html?myId=${id}`, '_blank')
+    }
+    function goArtist(id){
+      window.open(`./artist.html?myId=${id}`, '_blank')
+    }
 
 document.addEventListener("DOMContentLoaded", () => {
   const albumContainer = document.getElementsByClassName("albumSilenteList")[0];
@@ -35,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const startId = "rock"; // ID da cui iniziare
   const numberOfAlbums = 6;
 
+ 
 
   function fetchAlbum(id) {
     return fetch(
@@ -60,11 +66,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     hero.innerHTML = `
                 <div class="heroImg">
-          <a href = "./album.html?myId=${albums[indexRand].id} " target = "_blank">  <img src="${albums[indexRand].album.cover_medium}" alt="" /> </a>
+          <a href = "./album.html?myId=${albums[indexRand].album.id} " target = "_blank">  <img src="${albums[indexRand].album.cover_medium}" alt="" /> </a>
           </div>
           <div class="central">
             <p>ALBUM</p>
-           <a href = "./album.html?myId=${albums[indexRand].id}" target = "_blank">  <h1 title="${albums[indexRand].title}">${albums[indexRand].title}</h1> </a>
+           <a href = "./album.html?myId=${albums[indexRand].album.id}" target = "_blank">  <h1 title="${albums[indexRand].title}">${albums[indexRand].title}</h1> </a>
             <p><a href = "./artist.html?myId=${albums[indexRand].artist.id}" target = "_blank">${albums[indexRand].artist.name}</a> </p>
             <p>Ascoltalo subbbbbito</p>
             <div>
@@ -80,19 +86,19 @@ document.addEventListener("DOMContentLoaded", () => {
     albums.forEach((album) => {
       console.log(album);
         albumContainer.innerHTML += `
-
-                    <div class="albumSilente">
+                  
+                    <div class="albumSilente" onclick = "goAlbum(${album.album.id})">
                         <img src="${album.album.cover_small}"/>
                         <h5>${album.album.title}</h5>
                     </div>
                 `;
-
+               
 
     
     });
     list.innerHTML = ''
     playlistDown.forEach ((itemList) => {
-        list.innerHTML += ` <div class="item">
+        list.innerHTML += ` <div class="item" onclick = "goArtist(${itemList.artist.id})">
               <img
                 src="${itemList.artist.picture_medium}"
               />
@@ -105,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
     list2.innerHTML = ''
     otherAlbums.forEach((itemList) => {
         list2.innerHTML += `
-         <div class="item">
+         <div class="item" onclick = "goAlbum(${itemList.album.id})">
               <img
                 src="${itemList.album.cover_medium}"
               />
@@ -125,6 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
         footer.classList.remove('hidden')
         const audioPlayer = document.getElementById('audioPlayer')
         audioPlayer.setAttribute('autoplay', '')
+        audioPlayer.load()
         console.log(albums[indexRand].preview)
         const imgPlayer = document.getElementById('imgPlayer')
         imgPlayer.setAttribute('src', `${albums[indexRand].album.cover_medium}`)
@@ -138,10 +145,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const playPauseButton = document.getElementById('playPause');
         playPauseButton.classList.remove('fa-play');
         playPauseButton.classList.add('fa-pause');
-        
+      
         
     })
-
+    
 
   }
 
