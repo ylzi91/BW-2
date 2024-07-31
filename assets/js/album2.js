@@ -108,10 +108,10 @@
           </div>
           <div class="p-2 hero-content">
             <p class="m-0 p-2">Album</p>
-            <a class="text-decoration-none text-white" href="./album.html?myId=970410" target="_blank">
+            <a class="text-decoration-none text-white" href="#" target="_blank">
               <h1 class="m-0 p-2">${nameAl.title}</h1>
             </a>
-            <a class="text-decoration-none text-white" href="./artist.html?myId=1147" target="_blank">
+            <a class="text-decoration-none text-white" href="./artist2.html?myId=1147" target="_blank">
               <p class="m-0 p-2">${
                 nameAl.artist.name
               }</p>
