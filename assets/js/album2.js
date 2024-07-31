@@ -33,14 +33,14 @@
         heromobile.innerHTML = `
            
        <div class="item col-12 col-md-12 ">
-            <div class="gradient-card rounded">
+            <div class=" rounded">
               <div class=" d-sm-flex flex-column col-12 p-3 ">
                 <img
                   src="${
                     nameAl.cover_medium
                   }"
                   class="m-0 img-fluid w-50 align-self-center  ">
-                <div class="play d-sm-none">
+                <div class="play d-sm-none ">
                   <span class="fa fa-play" aria-hidden="true"></span>
                 </div>
                 <div class="flex-grow-1  pt-3">

@@ -73,14 +73,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     albumContainer.innerHTML = "";
     albums.forEach((album) => {
-      console.log(album);
+      // console.log(album);
         albumContainer.innerHTML += `
                   
                     
                           <div class="albumSilente col-6 col-md-4  ">
               <div class="d-flex justify-content-center align-items-center gradient-card rounded div-card">
                 <img src="${album.album.cover_small}" class="m-0  rounded-start card-img w-25 " />
-                <p class=" m-0 p-2 flex-grow-1">${album.album.title}</p>
+                <p class=" m-0 p-2 flex-grow-1"><a href = "./album2.html?myId=${album.album.id} " target = "_blank" class="text-decoration-none text-white"> ${album.album.title}</a></p>
               </div>
             </div>
                       `;
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
                    <div class="albumSilente col-6 col-lg-2  ">
               <div class="d-flex flex-column justify-content-center align-items-start gradient-card rounded div-card2">
                 <img src="${itemList.artist.picture_medium}" class="m-0  rounded w-100 card-img2 " />
-                <p class=" m-0 p-2 flex-grow-1">${itemList.album.title}</p>
+                <p class=" m-0 p-2 flex-grow-1"><a href = "./album2.html?myId=${itemList.album.id} " target = "_blank" class="text-decoration-none text-white"> ${itemList.album.title}</a></p>
               </div>
             </div>
                   `
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   </div>
                   <div class="flex-grow-1 ps-3">
                     <p class="m-0 p-2 fw-light gray">${itemList.artist.name}</p>
-                    <p class="m-0 p-2 ">${itemList.album.title}</p>
+                    <p class="m-0 p-2 "><a href = "./album2.html?myId=${itemList.album.id} " target = "_blank" class="text-decoration-none text-white"> ${itemList.album.title}</a></p>
 
                   </div>
                 </div>
