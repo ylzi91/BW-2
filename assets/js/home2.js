@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <span class="fa fa-play"></span>
                   </div>
                   <div class="flex-grow-1 ps-3">
-                    <p class="m-0 p-2 fw-light gray">${itemList.artist.name}</p>
+                    <p class="m-0 p-2 fw-light gray"><a href = "./artist2.html?myId=${itemList.artist.id} " target = "_blank" class="text-decoration-none gray">${itemList.artist.name}</a></p>
                     <p class="m-0 p-2 "><a href = "./album2.html?myId=${itemList.album.id} " target = "_blank" class="text-decoration-none text-white"> ${itemList.album.title}</a></p>
 
                   </div>
