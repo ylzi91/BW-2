@@ -1,6 +1,4 @@
-:root {
-    --my-var: url('https://images-ext-1.discordapp.net/external/gxEvXa6m5mqWqVNw2eZ_0MnX6812kFzFLU3R1s3THV8/%3Frik%3DljmpqetFlGv0vQ%26pid%3DImgRaw%26r%3D0/https/th.bing.com/th/id/R.9671435f3b3babd23f2e73cf9fbc2a66?format=webp&width=2078&height=1168');
-}
+
 
 * {
     padding: 0;
@@ -290,7 +288,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-image: url('var(--my-var)');
+    background-image: var(--my-var);
+    background-size: cover;
+    background-position: center;
 
     margin: 0 20px;
     padding: 20px;

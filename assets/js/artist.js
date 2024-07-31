@@ -62,11 +62,7 @@
     
       function displayAlbum(myArtist) {
         hero.innerHTML = `
-            <div class="heroImg">
-                <img src="${
-          myArtist.picture_medium
-        }" alt="" /> 
-            </div>
+
       <div class="central">
         <p>Artista verificato</p>
        <h1 title="${myArtist.name}">${myArtist.name}</h1> 
@@ -109,7 +105,8 @@
         
         await Promise.all(promises);
         displayAlbum(myArtist);
-        hero.style.setProperty("--my-var", `${myArtist.picture_medium}`);
+        hero.style.setProperty('--my-var', 'url(' + myArtist.picture_xl +')');
+        console.log('merdamerdosa', myArtist.picture_medium)
         displayTracks(traksArray);
         
         
