@@ -72,13 +72,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 `;
 
-    myUl.innerHTML = ''
-    tracks.forEach ((track, index) => {
-        myUl.innerHTML += `
-        <li onclick = "playSong(${index})">${index + 1}, ${track.title}, ${track.artist.name}, ${track.rank}, ${Math.floor(track.duration / 60)}:${Math.floor(track.duration % 60)}</li>
-    `
-    })
-   
+    myUl.innerHTML = "";
+    tracks.forEach((track, index) => {
+      myUl.innerHTML += `
+        <li onclick = "playSong(${index}, event)">${index + 1}, ${
+        track.title
+      }, ${track.artist.name}, ${track.rank}, ${Math.floor(
+        track.duration / 60
+      )}:${Math.floor(track.duration % 60) < 10 ? '0' + Math.floor(track.duration % 60) : Math.floor(track.duration % 60)}</li>
+    `;
+    });
   }
 
   async function loadAlbums(startId) {
@@ -127,15 +130,29 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
-
-
 });
+const videoPlayer = document.getElementById("audioPlayer");
+const playPauseButton = document.getElementById("playPause");
 
-function playSong(index){
-    
+playPauseButton.addEventListener("click", function (e) {
+  console.log(videoPlayer.paused);
+  if (videoPlayer.paused) {
+    e.preventDefault();
+    console.log("entra per play");
+    videoPlayer.play();
+    playPauseButton.classList.remove("fa-play");
+    playPauseButton.classList.add("fa-pause");
+  } else {
+    e.preventDefault();
+    console.log("entra per pausa");
+    videoPlayer.pause();
+    playPauseButton.classList.remove("fa-pause");
+    playPauseButton.classList.add("fa-play");
+  }
+});
+function playSong(index, e) {
+  e.preventDefault();
 
-  const videoPlayer = document.getElementById("audioPlayer");
-  const playPauseButton = document.getElementById("playPause");
   const backwardButton = document.getElementById("backward");
   const forwardButton = document.getElementById("forward");
   const progressBar = document.getElementById("progressBar");
@@ -144,32 +161,22 @@ function playSong(index){
   const volumerBar = document.getElementById("volumeBar");
   videoPlayer.volume = volumerBar.value / 100;
 
-  const footer = document.getElementsByTagName('footer')[0]
-    footer.classList.remove('hidden')
+  const footer = document.getElementsByTagName("footer")[0];
+  footer.classList.remove("hidden");
+  const imgPlayer = document.getElementById("imgPlayer");
+  imgPlayer.setAttribute("src", `${traksArray[index].album.cover_small}`);
+  const titlePlayer = document.getElementById("titlePlayer");
+  titlePlayer.innerText = `${traksArray[index].title}`;
 
-    const artistPlayer = document.getElementById('artistPlayer')
-    artistPlayer.innerText = `${traksArray[index].artist.name}`
-  
-    videoPlayer.innerHTML = `<source src = "${traksArray[index].preview}" type="audio/mp3"></source>`
-    videoPlayer.setAttribute('autoplay','')
-    videoPlayer.load()
-    playPauseButton.classList.remove("fa-play");
-    playPauseButton.classList.add("fa-pause");
+  const artistPlayer = document.getElementById("artistPlayer");
+  artistPlayer.innerText = `${traksArray[index].artist.name}`;
 
+  videoPlayer.innerHTML = `<source src = "${traksArray[index].preview}" type="audio/mp3"></source>`;
+  videoPlayer.load();
+  videoPlayer.play();
+  playPauseButton.classList.remove("fa-play");
+  playPauseButton.classList.add("fa-pause");
 
-  playPauseButton.addEventListener("click", () => {
-    if (videoPlayer.paused) {
-        console.log('entra per play')
-      videoPlayer.play();
-      playPauseButton.classList.remove("fa-play");
-      playPauseButton.classList.add("fa-pause");
-    } else if(videoPlayer.played) {
-        console.log('entra per pausa')
-      videoPlayer.pause();
-      playPauseButton.classList.remove("fa-pause");
-      playPauseButton.classList.add("fa-play");
-    }
-  });
 
   backwardButton.addEventListener("click", () => {
     videoPlayer.currentTime -= 10;
@@ -203,5 +210,4 @@ function playSong(index){
     const secs = Math.floor(seconds % 60);
     return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
   }
-
 }
