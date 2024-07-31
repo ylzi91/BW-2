@@ -98,6 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     list.innerHTML = ''
     playlistDown.forEach ((itemList) => {
+      console.log('idArtista',itemList.artist.id)
         list.innerHTML += ` <div class="item" onclick = "goArtist(${itemList.artist.id})">
               <img
                 src="${itemList.artist.picture_medium}"
