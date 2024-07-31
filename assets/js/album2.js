@@ -1,5 +1,3 @@
-
-
 /* async function searchDeezer(query) {
    const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${query}`);
    const data = await response.json();
@@ -26,20 +24,16 @@
 
 
 
-document.addEventListener("DOMContentLoaded", () => {
+   document.addEventListener("DOMContentLoaded", () => {
     const albumContainer = document.getElementsByClassName("albumSilenteList")[0];
     const hero = document.getElementsByClassName('hero')[0];
     const list = document.getElementsByClassName('list')[0];
     const list2 = document.getElementsByClassName('list')[1];
-    const time =document.getElementById("time")
+   
     const startId = "rock"; // ID da cui iniziare
     const numberOfAlbums = 6;
-    const orario= new Date ().getHours();
+    
 
-if(orario>=12) {
-  time.innerText="Buonasera"
-}
-else {time.innerText="Buongiorno"}
  
     function fetchAlbum(id) {
         return fetch(
@@ -322,9 +316,4 @@ else {time.innerText="Buongiorno"}
 
 
 });
-
-
-
-
-
 

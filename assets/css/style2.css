@@ -260,12 +260,39 @@
   color: white !important;
 }
 .input-box::placeholder{ color:#b3b3b3 !important;}
+
+.card-img {width: 100%;
+height: 70px;
+object-fit: cover;}
+.riga-numero{flex: 1 1 5%;}
+
+.riga-titolo{flex: 1 1 50%;}
+.riga-rip{flex: 1 1 20%;}
+.riga-tempo{flex: 1 1 15%;}
+
+
+.sfondo {background-image: url("https://e-cdns-images.dzcdn.net/images/artist/cbe643e4c6937b2a0de81cc01de7fa53/250x250-000000-80-0-0.jpg");
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-position: center;
+background-size: cover;
+height: 300px;}
+
+
 /* Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
   .gradient {
      background-color: black;
   }
-}
+  .card-img {width: 100%;
+    height: 70px;
+    object-fit: cover;}
+    .div-card {
+      height: 70px;
+     }
+    .div-card p {
+        width: fit-content;}}
+
 
 
 /* Medium devices (tablets, 768px and up)*/
@@ -282,7 +309,15 @@
   }
   .hero-content {flex: 1 1 70%;}
 .annunced{flex: 1 1 30%;}
-}
+.card-img {width: 100%;
+  height: 60px;
+  object-fit: cover;}
+
+.div-card {
+  height: 60px;
+ }
+.div-card p {
+    width: fit-content;}}
 
 /* Large devices (desktops, 992px and up)*/
 @media (min-width: 992px) {
@@ -290,14 +325,31 @@
 
   .hero-content {flex: 1 1 70%;}
   .annunced{flex: 1 1 30%;}
+  .card-img2 {width: 100%;
+    height: 110px;
+    object-fit: cover;}
+    .div-card2 {
+      height: 230px;
+     }
+    .div-card2 p {
+        width: fit-content;}}
 
   
-}
+
 
 /* Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {
   .hero-content {flex: 1 1 80%;}
 .annunced{flex: 1 1 20%;}
+.card-img {width: 100%;
+  height: 65px;
+  object-fit: cover;}
+
+.div-card {
+  height: 65px;
+ }
+.div-card p {
+    width: fit-content;}
 }
   
 
@@ -305,4 +357,21 @@
 @media (min-width: 1400px) { 
   .hero-content {flex: 1 1 80%;}
 .annunced{flex: 1 1 20%;}
-}
+.card-img {width: 100%;
+  height: 70px;
+  object-fit: cover;}
+
+.div-card {
+  height: 70px;
+ }
+.div-card p {
+    width: fit-content;}
+    .card-img2 {width: 100%;
+      height: 140px;
+      object-fit: cover;}
+      .div-card2 {
+        height: 250px;
+       }
+      .div-card2 p {
+          width: fit-content;}} 
+  
