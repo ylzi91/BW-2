@@ -36,9 +36,9 @@
       const numberOfAlbums = 6;
     
       const myId = new URLSearchParams(location.search).get("myId");
-      function fetchAlbum(id) {
+      function fetchAlbum(id, numOfTracks) {
         return fetch(
-          `https://striveschool-api.herokuapp.com/api/deezer/artist/${id}/top?limit=5`
+          `https://striveschool-api.herokuapp.com/api/deezer/artist/${id}/top?limit=${numOfTracks}`
         )
           .then((response) => response.json())
           .then((data) => data)
@@ -60,7 +60,7 @@
           });
       }
     
-      function displayAlbum(myArtist ,traksArray) {
+      function displayAlbum(myArtist) {
         hero.innerHTML = `
             <div class="heroImg">
                 <img src="${
@@ -76,25 +76,31 @@
     
     `;
     
-        myUl.innerHTML = "";
+    
+}
+
+    function displayTracks(traksArray) {
+        myUl.innerHTML = '';
         traksArray.forEach((track, index) => {
-          myUl.innerHTML += `
+        myUl.innerHTML += `
             <li onclick = "playSong(${index}, event)">${index + 1} <img src = "${track.contributors[0].picture_small}" /> ${track.title }, ${track.rank}, ${Math.floor(track.duration / 60)}:${Math.floor(track.duration % 60) < 10 ? '0' + Math.floor(track.duration % 60) : Math.floor(track.duration % 60)}</li>
         `;
         });
-      }
     
-      async function loadAlbums(trackId) {
+      }
+      let num = 5
+      async function loadAlbums(trackId, num) {
         const promises = [];
         let myArtist;
+
         
-    
         promises.push(
             fetchArtist(trackId).then((artist) => {
                 myArtist = artist
             }),
-            fetchAlbum(trackId).then((album) => {
+            fetchAlbum(trackId, num).then((album) => {
                 console.log("Canozoniiiii", album.data[0].title);
+                traksArray.length = 0
                 album.data.forEach((tracks) => {
                     traksArray.push(tracks);
                 });
@@ -102,12 +108,23 @@
         );
         
         await Promise.all(promises);
-        displayAlbum(myArtist, traksArray);
+        displayAlbum(myArtist);
+        hero.style.setProperty("--my-var", `${myArtist.picture_medium}`);
+        displayTracks(traksArray);
+        
+        
+        
+        
         console.log("album appiattito", promises);
     }
-
+    
+    const seeOther = document.getElementById('seeOther')
+    seeOther.addEventListener('click', function (){
+        num += 5
+        loadAlbums(myId, num)
+        })
       // Carica 10 album a partire dall'ID specificato
-      loadAlbums(myId);
+      loadAlbums(myId, num);
     
       const searchButton = document.getElementById("searchButton");
       const searchBar = document.getElementsByClassName("hidden")[0];
@@ -210,5 +227,11 @@
         const secs = Math.floor(seconds % 60);
         return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
       }
+    }
+
+    let sum
+    function visualizzaAltro(){
+        sum += 5
+        return sum
     }
     
