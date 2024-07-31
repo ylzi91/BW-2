@@ -283,21 +283,27 @@ object-fit: cover;}
 .riga-tempo2{flex: 1 1 20%;}
 
 
-.sfondo {background-image: url("https://e-cdns-images.dzcdn.net/images/artist/cbe643e4c6937b2a0de81cc01de7fa53/250x250-000000-80-0-0.jpg");
+.sfondo {
 background-repeat: no-repeat;
-background-attachment: fixed;
+
 background-position: center;
 background-size: cover;
 height: 300px;}
 
-.sfondo1 {background-image: url("https://e-cdns-images.dzcdn.net/images/artist/cbe643e4c6937b2a0de81cc01de7fa53/250x250-000000-80-0-0.jpg");
+.sfondo1 {
   background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
+  
+  background-position-x: center;
+  background-position-y: center;
+  background-size: contain;
+  width: 100%;
+  height: 400px;
   }
   .sfocatura2{background: rgb(2,0,36);
     background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(29,185,84,1) 100%);}
+
+
+
 /* Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
   .gradient {
