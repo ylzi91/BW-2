@@ -83,7 +83,7 @@
                     </span>
                   </li>
                   <li class="list-group-item">
-                    <span class="material-symbols-outlined fs-1 p-2 pe-0">
+                    <span onclick = "playSong(0)" class="material-symbols-outlined fs-1 p-2 pe-0">
                       autoplay
                     </span>
 
@@ -205,12 +205,23 @@
     
      
     });
+    const videoPlayer = document.getElementById("audioPlayer");
+    const playPauseButton = document.getElementById("playPause");
+    playPauseButton.addEventListener('click', () => {
+      if (videoPlayer.paused) {
+        videoPlayer.play();
+        playPauseButton.classList.remove('fa-play');
+        playPauseButton.classList.add('fa-pause');
+      } else {
+        videoPlayer.pause();
+        playPauseButton.classList.remove('fa-pause');
+        playPauseButton.classList.add('fa-play');
+      }
+    });
     
     function playSong(index){
         
     
-      const videoPlayer = document.getElementById("audioPlayer");
-      const playPauseButton = document.getElementById("playPause");
       const backwardButton = document.getElementById("backward");
       const forwardButton = document.getElementById("forward");
       const progressBar = document.getElementById("progressBar");
@@ -218,10 +229,10 @@
       const durationSpan = document.getElementById("duration");
       const volumerBar = document.getElementById("volumeBar");
       videoPlayer.volume = volumerBar.value / 100;
-    const play = document.getElementById('play')
-            play.style.display="block"
-            const imgPlayer = document.getElementById('imgPlayer')
-            imgPlayer.setAttribute('src', `${traksArray[index].album.cover_medium}`)
+      const play = document.getElementById('play')
+      play.style.display="block"
+      const imgPlayer = document.getElementById('imgPlayer')
+      imgPlayer.setAttribute('src', `${traksArray[index].album.cover_medium}`)
         const artistPlayer = document.getElementById('artistPlayer')
         artistPlayer.innerText = `${traksArray[index].artist.name}`
       
@@ -231,17 +242,6 @@
         playPauseButton.classList.remove("fa-play");
         playPauseButton.classList.add("fa-pause");
     
-        playPauseButton.addEventListener('click', () => {
-          if (videoPlayer.paused) {
-            videoPlayer.play();
-            playPauseButton.classList.remove('fa-play');
-            playPauseButton.classList.add('fa-pause');
-          } else {
-            videoPlayer.pause();
-            playPauseButton.classList.remove('fa-pause');
-            playPauseButton.classList.add('fa-play');
-          }
-        });
       
         backwardButton.addEventListener('click', () => {
           videoPlayer.currentTime -= 10;

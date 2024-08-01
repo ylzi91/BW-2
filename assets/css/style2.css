@@ -156,7 +156,12 @@
    
   }
  .heroImg {flex: 1 1} 
- 
+  
+  .heroArtist {
+    background-image: var(--my-var) !important;
+    background-size: cover !important;
+    background-position: top !important;
+  }
   
   .annunced {
     align-self: start;

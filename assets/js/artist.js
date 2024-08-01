@@ -32,8 +32,7 @@
       const hero = document.getElementsByClassName("hero")[0];
       const myUl = document.getElementById("myUl");
     
-      const startId = "rock"; // ID da cui iniziare
-      const numberOfAlbums = 6;
+      
     
       const myId = new URLSearchParams(location.search).get("myId");
       function fetchAlbum(id, numOfTracks) {

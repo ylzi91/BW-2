@@ -8,6 +8,7 @@
     }
     
     document.addEventListener("DOMContentLoaded", () => {
+        const heroArtist = document.getElementsByClassName('heroArtist')[0]
         const hero2 = document.getElementById("hero2");
         const heromobile2 = document.getElementById("heromobile2");
       const branimobile2 = document.getElementById("branimobile2");
@@ -222,8 +223,8 @@ sfondomobile.style.backgroundImage=`url(${
         
         await Promise.all(promises);
         displayAlbum(myArtist);
-       
         displayTracks(traksArray);
+        heroArtist.style.setProperty('--my-var', 'url(' + myArtist.picture_xl +')');
         
         
         
