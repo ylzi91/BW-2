@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <ul class=" p-0 m-0 d-flex ">
                   <li class="list-group-item">
 
-                    <span class="material-symbols-outlined fs-1 p-2 ps-0 ">
+                    <span class="material-symbols-outlined fs-1 p-2 ps-0 " id="heart-mobile" onclick="like()">
                       favorite
                     </span>
 
@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <img src="${track.album.cover_small}" class="img-fluid">
               </div>
               <div class="riga-titolo1 d-flex flex-column justify-content-center ">
-                <p class="m-0 fw-light ps-3 ">${track.title}</p>
+                <p class="m-0 fw-light ps-3 " onclick = "playSong(${index}, event)">${track.title}</p>
                 <p class="m-0  fw-light gray ps-3">${nomi}</p>
               </div>
               <div class="riga-rip1 d-flex justify-content-end align-items-center"> <ul class=" m-0 d-flex ">
@@ -230,15 +230,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const seeOther = document.getElementById('seeOther')
     seeOther.addEventListener('click', function (){
-      if (seeOther.innerText === 'Visualizza altro'){
+      console.log(seeOther)
+      if (seeOther.innerText === 'VISUALIZZA ALTRO'){
         num += 10
         loadAlbums(myId, num)
-        seeOther.innerText = 'Nascondi'
+        seeOther.innerText = 'NASCONDI'
       }
-      else if (seeOther.innerText === 'Nascondi'){
+      else if (seeOther.innerText === 'NASCONDI'){
         num -=10
         loadAlbums (myId, num)
-        seeOther.innerText = 'Visualizza altro'
+        seeOther.innerText = 'VISUALIZZA ALTRO'
       }
        
       })
@@ -260,7 +261,7 @@ playPauseButton.addEventListener("click", () => {
 });
 
 function playSong(index) {
-  document.getElementById('translateFoot').style = 'height:100px'
+ 
   const backwardButton = document.getElementById("backward");
   const forwardButton = document.getElementById("forward");
   const progressBar = document.getElementById("progressBar");
@@ -318,3 +319,18 @@ function playSong(index) {
 }
 
 
+function like () { 
+  const cuore =document.getElementById("heart-artist")
+  const cuoreMobile =document.getElementById("heart-mobile")
+  console.log(cuore.style.color)
+  if (cuore.style.color==="rgb(29, 185, 84)"||cuoreMobile.style.color==="rgb(29, 185, 84)" ) {
+    cuore.style.color="white"
+    cuoreMobile.style.color="white"
+  }
+  else{cuore.style.color="rgb(29, 185, 84)"
+    cuoreMobile.style.color="rgb(29, 185, 84)"
+  }
+  
+  
+  
+}

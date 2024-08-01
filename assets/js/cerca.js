@@ -70,13 +70,13 @@ async function loadAlbums(query, numberOfAlbums) {
 
     await Promise.all(promises);
     console.log("album appiattito", albums);
-    displayAlbums(albums.flat().splice(0, 8));
+    displayAlbums(albums.flat().splice(0, 12));
   }
   searchInput.addEventListener('keyup', async (event) => {
     if (event.key === 'Enter') {
       const query = searchInput.value.trim();
       if (query) {
-        await loadAlbums(query, 8);
+        await loadAlbums(query, 12);
       }
     }
   });
