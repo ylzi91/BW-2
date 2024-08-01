@@ -228,12 +228,21 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("album appiattito", promises);
   }
 
-  // const seeOther = document.getElementById('seeOther')
-  // seeOther.addEventListener('click', function (){
-  //     num += 5
-  //     loadAlbums(myId, num)
-  //     })
-  // Carica 10 album a partire dall'ID specificato
+    const seeOther = document.getElementById('seeOther')
+    seeOther.addEventListener('click', function (){
+      if (seeOther.innerText === 'Visualizza altro'){
+        num += 10
+        loadAlbums(myId, num)
+        seeOther.innerText = 'Nascondi'
+      }
+      else if (seeOther.innerText === 'Nascondi'){
+        num -=10
+        loadAlbums (myId, num)
+        seeOther.innerText = 'Visualizza altro'
+      }
+       
+      })
+
   loadAlbums(myId, num);
 });
 const videoPlayer = document.getElementById("audioPlayer");
@@ -308,8 +317,4 @@ function playSong(index) {
   }
 }
 
-let sum;
-function visualizzaAltro() {
-  sum += 5;
-  return sum;
-}
+

@@ -11,6 +11,10 @@
     font-family: "Circular" !important;
     
   }
+
+  .pointer {
+    cursor: pointer;
+  }
   
   .logo img {
     width: 20vh;
@@ -159,8 +163,8 @@
   
   .heroArtist {
     background-image: var(--my-var) !important;
-    background-size: cover !important;
-    background-position: top !important;
+    background-size: contain !important;
+    background-position: center !important;
   }
   
   .annunced {

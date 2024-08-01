@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   
                     
                           <div class="albumSilente col-6 col-md-4  ">
-              <div class="d-flex justify-content-center align-items-center gradient-card rounded div-card">
+              <div class="d-flex justify-content-center align-items-center gradient-card rounded div-card pointer" onclick = "goAlbum(${album.album.id})">
                 <img src="${album.album.cover_small}" class="m-0  rounded-start card-img w-25 " />
                 <p class=" m-0 p-2 flex-grow-1"><a href = "./album2.html?myId=${album.album.id} " target = "_blank" class="text-decoration-none text-white"> ${album.album.title}</a></p>
               </div>
@@ -95,8 +95,8 @@ document.addEventListener("DOMContentLoaded", () => {
             list.innerHTML += `
                    
                   
-                   <div class="albumSilente col-6 col-lg-2  ">
-              <div class="d-flex flex-column justify-content-center align-items-start gradient-card rounded div-card2">
+                   <div onclick = "goAlbum(${itemList.album.id})" class="albumSilente col-6 col-lg-2 ">
+              <div class="d-flex flex-column justify-content-center align-items-start gradient-card rounded div-card2 pointer">
                 <img src="${itemList.artist.picture_medium}" class="m-0  rounded w-100 card-img2 " />
                 <p class=" m-0 p-2 flex-grow-1"><a href = "./album2.html?myId=${itemList.album.id} " target = "_blank" class="text-decoration-none text-white"> ${itemList.album.title}</a></p>
               </div>
@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   `
                   list2.innerHTML += `
                    
-                   <div class="item col-12 col-md-6 ">
+                   <div onclick = "goAlbum(${itemList.album.id})" class="item col-12 col-md-6 ">
               <div class="gradient-card rounded">
                 <div class=" d-sm-flex col-12 p-3 ">
                   <img src="${itemList.artist.picture_medium}" class="m-0 img-fluid w-50  " />
@@ -200,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     await Promise.all(promises);
     console.log("album appiattito", albums);
-    displayAlbums(albums.flat().splice(0, 6), albums.flat().splice(7, 10), albums.flat().splice(17, 8));
+    displayAlbums(albums.flat().splice(0, 6), albums.flat().splice(7, 18), albums.flat().splice(17, 8));
   }
 
   // Carica 10 album a partire dall'ID specificato

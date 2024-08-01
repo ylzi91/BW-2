@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <a class="text-decoration-none text-white" href="#" target="_blank">
               <h1 class="m-0 p-2">${nameAl.title}</h1>
             </a>
-            <a class="text-decoration-none text-white" href="./artist2.html?myId=1147" target="_blank">
+            <a class="text-decoration-none text-white" href="./artist2.html?myId=${nameAl.artist.id}" target="_blank">
               <p class="m-0 p-2">${nameAl.artist.name}</p>
             </a>
 
