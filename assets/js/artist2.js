@@ -1,3 +1,6 @@
+const spinner = document.getElementById("spinner")
+
+
 const traksArray = [];
 function goAlbum(id) {
   window.open(`./album2.html?myId=${id}`, "_blank");
@@ -203,7 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function loadAlbums(trackId, num) {
     const promises = [];
     let myArtist;
-
+    spinner.classList.remove("d-none")
     promises.push(
       fetchArtist(trackId).then((artist) => {
         myArtist = artist;
@@ -224,7 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "--my-var",
       "url(" + myArtist.picture_xl + ")"
     );
-
+    spinner.classList.add("d-none")
     console.log("album appiattito", promises);
   }
 

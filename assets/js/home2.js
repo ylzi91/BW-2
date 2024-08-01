@@ -3,7 +3,7 @@
 
 
 
-
+const spinner = document.getElementById("spinner")
 
 
 
@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const albums = [];
     const promises = [];
     let currentId = startId;
-
+spinner.classList.remove("d-none")
     for (let i = 0; i < numberOfAlbums; i++) {
       promises.push(
         fetchAlbum(currentId).then((data) => {
@@ -201,8 +201,10 @@ document.addEventListener("DOMContentLoaded", () => {
     await Promise.all(promises);
     console.log("album appiattito", albums);
     displayAlbums(albums.flat().splice(0, 6), albums.flat().splice(7, 18), albums.flat().splice(17, 8));
-  }
 
+    spinner.classList.add("d-none")
+  }
+ 
   // Carica 10 album a partire dall'ID specificato
   loadAlbums(startId, numberOfAlbums);
 

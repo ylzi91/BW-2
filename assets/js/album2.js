@@ -1,3 +1,5 @@
+const spinner = document.getElementById("spinner")
+
 const traksArray = [];
 function goAlbum(id) {
   window.open(`./album2.html?myId=${id}`, "_blank");
@@ -177,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const promises = [];
 
     let currentId = startId;
-
+    spinner.classList.remove("d-none")
     promises.push(
       fetchAlbum(currentId).then((album) => {
         nameAlbum = album;
@@ -192,6 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
     await Promise.all(promises);
     console.log("album appiattito", promises);
     displayAlbum(nameAlbum, traksArray);
+    spinner.classList.add("d-none")
   }
 
   // Carica 10 album a partire dall'ID specificato
