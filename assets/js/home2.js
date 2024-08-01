@@ -159,6 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
         const btnPlay = document.getElementById('btnPlay')
         btnPlay.addEventListener('click', function (){
+            document.getElementById('translateFoot').style = 'height:100px'
             const play = document.getElementById('play')
             play.style.display="block"
             const audioPlayer = document.getElementById('audioPlayer')
@@ -212,8 +213,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const backwardButton = document.getElementById('backward');
   const forwardButton = document.getElementById('forward');
   const progressBar = document.getElementById('progressBar');
-  const currentTimeSpan = document.getElementById('currentTime');
-  const durationSpan = document.getElementById('duration');
+  //const currentTimeSpan = document.getElementById('currentTime');
+  //const durationSpan = document.getElementById('duration');
   const volumerBar = document.getElementById('volumeBar');
   videoPlayer.volume = volumerBar.value / 100;
 
@@ -241,11 +242,11 @@ document.addEventListener("DOMContentLoaded", () => {
   videoPlayer.addEventListener('timeupdate', () => {
     const progress = (videoPlayer.currentTime / videoPlayer.duration) * 100;
     progressBar.value = progress;
-    currentTimeSpan.textContent = formatTime(videoPlayer.currentTime);
+    //currentTimeSpan.textContent = formatTime(videoPlayer.currentTime);
   });
 
   videoPlayer.addEventListener('loadedmetadata', () => {
-    durationSpan.textContent = formatTime(videoPlayer.duration);
+    //durationSpan.textContent = formatTime(videoPlayer.duration);
   });
 
   progressBar.addEventListener('input', () => {

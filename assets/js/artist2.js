@@ -1,49 +1,46 @@
+const traksArray = [];
+function goAlbum(id) {
+  window.open(`./album2.html?myId=${id}`, "_blank");
+}
+function goArtist(id) {
+  window.open(`./artist2.html?myId=${id}`, "_blank");
+}
 
-    const traksArray = [];
-    function goAlbum(id) {
-      window.open(`./album2.html?myId=${id}`, "_blank");
-    }
-    function goArtist(id) {
-      window.open(`./artist2.html?myId=${id}`, "_blank");
-    }
-    
-    document.addEventListener("DOMContentLoaded", () => {
-        const heroArtist = document.getElementsByClassName('heroArtist')[0]
-        const hero2 = document.getElementById("hero2");
-        const heromobile2 = document.getElementById("heromobile2");
-      const branimobile2 = document.getElementById("branimobile2");
-      const brani2 = document.getElementById("brani2");
-    
-      
-    
-      const myId = new URLSearchParams(location.search).get("myId");
-      function fetchAlbum(id, numOfTracks) {
-        return fetch(
-          `https://striveschool-api.herokuapp.com/api/deezer/artist/${id}/top?limit=${numOfTracks}`
-        )
-          .then((response) => response.json())
-          .then((data) => data)
-          .catch((error) => {
-            console.error("Error fetching album:", error);
-            return null;
-          });
-      }
+document.addEventListener("DOMContentLoaded", () => {
+  const heroArtist = document.getElementsByClassName("heroArtist")[0];
+  const hero2 = document.getElementById("hero2");
+  const heromobile2 = document.getElementById("heromobile2");
+  const branimobile2 = document.getElementById("branimobile2");
+  const brani2 = document.getElementById("brani2");
 
-      function fetchArtist(id) {
-        return fetch(
-          `https://striveschool-api.herokuapp.com/api/deezer/artist/${id}`
-        )
-          .then((response) => response.json())
-          .then((data) => data)
-          .catch((error) => {
-            console.error("Error fetching album:", error);
-            return null;
-          });
-      }
-    
-      function displayAlbum(myArtist) {
-        console.log(myArtist)
-        hero2.innerHTML = `
+  const myId = new URLSearchParams(location.search).get("myId");
+  function fetchAlbum(id, numOfTracks) {
+    return fetch(
+      `https://striveschool-api.herokuapp.com/api/deezer/artist/${id}/top?limit=${numOfTracks}`
+    )
+      .then((response) => response.json())
+      .then((data) => data)
+      .catch((error) => {
+        console.error("Error fetching album:", error);
+        return null;
+      });
+  }
+
+  function fetchArtist(id) {
+    return fetch(
+      `https://striveschool-api.herokuapp.com/api/deezer/artist/${id}`
+    )
+      .then((response) => response.json())
+      .then((data) => data)
+      .catch((error) => {
+        console.error("Error fetching album:", error);
+        return null;
+      });
+  }
+
+  function displayAlbum(myArtist) {
+    console.log(myArtist);
+    hero2.innerHTML = `
            
       <div class="p-2 hero-content">
            
@@ -58,12 +55,10 @@
           </div>
     
     `;
- hero2.style.backgroundImage=`url(${
-    myArtist.picture_xl
-  })`   
+    hero2.style.backgroundImage = `url(${myArtist.picture_xl})`;
 
-console.log(hero2.style)
-  heromobile2.innerHTML = `
+    console.log(hero2.style);
+    heromobile2.innerHTML = `
            
    <div class="item col-12 col-md-12 ">
             <div class="gradient-card rounded">
@@ -118,23 +113,20 @@ console.log(hero2.style)
           </div>
 
 `;
-const sfondomobile = document.getElementById("sfondomobile");
-sfondomobile.style.backgroundImage=`url(${
-    myArtist.picture_xl
-  })`   
-}
+    const sfondomobile = document.getElementById("sfondomobile");
+    sfondomobile.style.backgroundImage = `url(${myArtist.picture_xl})`;
+  }
 
-    function displayTracks(traksArray) {
-        brani2.innerHTML = '';
-        branimobile2.innerHTML="";
-        traksArray.forEach((track, index) => {
-            console.log(track)
-            let nomi="";
-            for (let i =0; i<track.contributors.length; i++) 
-            {
-                nomi+=track.contributors[i].name+" "
-            }
-        brani2.innerHTML += `
+  function displayTracks(traksArray) {
+    brani2.innerHTML = "";
+    branimobile2.innerHTML = "";
+    traksArray.forEach((track, index) => {
+      console.log(track);
+      let nomi = "";
+      for (let i = 0; i < track.contributors.length; i++) {
+        nomi += track.contributors[i].name + " ";
+      }
+      brani2.innerHTML += `
            
 
 
@@ -148,12 +140,20 @@ sfondomobile.style.backgroundImage=`url(${
                     <img src="${track.album.cover_small}" class="img-fluid">
                   </div>
                   <div class="riga-titolo2 d-flex flex-column justify-content-center ">
-                    <p class="m-0 fw-light ps-3 ">${track.title }</p>
-                     <p class="m-0 fw-light ps-3 gray ">${nomi }</p>
+                    <p onclick = "playSong(${index}, event)" class="m-0 fw-light ps-3 ">${track.title}</p>
+                     <p class="m-0 fw-light ps-3 gray ">${nomi}</p>
                    
                   </div>
-                  <div class="riga-rip2 d-flex justify-content-end align-items-center"><p class="m-0  fw-light gray ps-3">${track.rank}</p> </div>
-                  <div class="riga-tempo2 d-flex justify-content-center align-items-center"><p class="m-0  fw-light gray ps-3">${Math.floor(track.duration / 60)}:${Math.floor(track.duration % 60) < 10 ? '0' + Math.floor(track.duration % 60) : Math.floor(track.duration % 60)}</p> </div>
+                  <div class="riga-rip2 d-flex justify-content-end align-items-center"><p class="m-0  fw-light gray ps-3">${
+                    track.rank
+                  }</p> </div>
+                  <div class="riga-tempo2 d-flex justify-content-center align-items-center"><p class="m-0  fw-light gray ps-3">${Math.floor(
+                    track.duration / 60
+                  )}:${
+        Math.floor(track.duration % 60) < 10
+          ? "0" + Math.floor(track.duration % 60)
+          : Math.floor(track.duration % 60)
+      }</p> </div>
                  
                 </div>
               </div>
@@ -162,7 +162,7 @@ sfondomobile.style.backgroundImage=`url(${
 
         `;
 
-        branimobile2.innerHTML += `
+      branimobile2.innerHTML += `
            
 
 
@@ -176,8 +176,8 @@ sfondomobile.style.backgroundImage=`url(${
                 <img src="${track.album.cover_small}" class="img-fluid">
               </div>
               <div class="riga-titolo1 d-flex flex-column justify-content-center ">
-                <p class="m-0 fw-light ps-3 ">${track.title }</p>
-                <p class="m-0  fw-light gray ps-3">${nomi }</p>
+                <p class="m-0 fw-light ps-3 ">${track.title}</p>
+                <p class="m-0  fw-light gray ps-3">${nomi}</p>
               </div>
               <div class="riga-rip1 d-flex justify-content-end align-items-center"> <ul class=" m-0 d-flex ">
                 <li class="list-group-item">
@@ -197,139 +197,119 @@ sfondomobile.style.backgroundImage=`url(${
        
        
                `;
-
-
-        });
-    
-      }
-      let num = 5
-      async function loadAlbums(trackId, num) {
-        const promises = [];
-        let myArtist;
-
-        
-        promises.push(
-            fetchArtist(trackId).then((artist) => {
-                myArtist = artist
-            }),
-            fetchAlbum(trackId, num).then((album) => {
-                console.log("Canozoniiiii", album.data[0].title);
-                traksArray.length = 0
-                album.data.forEach((tracks) => {
-                    traksArray.push(tracks);
-                });
-            })
-        );
-        
-        await Promise.all(promises);
-        displayAlbum(myArtist);
-        displayTracks(traksArray);
-        heroArtist.style.setProperty('--my-var', 'url(' + myArtist.picture_xl +')');
-        
-        
-        
-        
-        console.log("album appiattito", promises);
-    }
-    
-    // const seeOther = document.getElementById('seeOther')
-    // seeOther.addEventListener('click', function (){
-    //     num += 5
-    //     loadAlbums(myId, num)
-    //     })
-      // Carica 10 album a partire dall'ID specificato
-      loadAlbums(myId, num);
-    
-})
-
-const videoPlayer = document.getElementById("audioPlayer");
-    const playPauseButton = document.getElementById("playPause");
-    
-    playPauseButton.addEventListener("click", function (e) {
-      console.log(videoPlayer.paused);
-      if (videoPlayer.paused) {
-        e.preventDefault();
-        console.log("entra per play");
-        videoPlayer.play();
-        playPauseButton.classList.remove("fa-play");
-        playPauseButton.classList.add("fa-pause");
-      } else {
-        e.preventDefault();
-        console.log("entra per pausa");
-        videoPlayer.pause();
-        playPauseButton.classList.remove("fa-pause");
-        playPauseButton.classList.add("fa-play");
-      }
     });
+  }
+  let num = 5;
+  async function loadAlbums(trackId, num) {
+    const promises = [];
+    let myArtist;
 
-    
+    promises.push(
+      fetchArtist(trackId).then((artist) => {
+        myArtist = artist;
+      }),
+      fetchAlbum(trackId, num).then((album) => {
+        console.log("Canozoniiiii", album.data[0].title);
+        traksArray.length = 0;
+        album.data.forEach((tracks) => {
+          traksArray.push(tracks);
+        });
+      })
+    );
 
-    function playSong(index, e) {
-      e.preventDefault();
-    
-      const backwardButton = document.getElementById("backward");
-      const forwardButton = document.getElementById("forward");
-      const progressBar = document.getElementById("progressBar");
-      const currentTimeSpan = document.getElementById("currentTime");
-      const durationSpan = document.getElementById("duration");
-      const volumerBar = document.getElementById("volumeBar");
-      videoPlayer.volume = volumerBar.value / 100;
-    
-      const footer = document.getElementsByTagName("footer")[0];
-      footer.classList.remove("hidden");
-      const imgPlayer = document.getElementById("imgPlayer");
-      imgPlayer.setAttribute("src", `${traksArray[index].album.cover_small}`);
-      const titlePlayer = document.getElementById("titlePlayer");
-      titlePlayer.innerText = `${traksArray[index].title}`;
-    
-      const artistPlayer = document.getElementById("artistPlayer");
-      artistPlayer.innerText = `${traksArray[index].artist.name}`;
-    
-      videoPlayer.innerHTML = `<source src = "${traksArray[index].preview}" type="audio/mp3"></source>`;
-      videoPlayer.load();
-      videoPlayer.play();
-      playPauseButton.classList.remove("fa-play");
-      playPauseButton.classList.add("fa-pause");
-    
-    
-      backwardButton.addEventListener("click", () => {
-        videoPlayer.currentTime -= 10;
-      });
-    
-      forwardButton.addEventListener("click", () => {
-        videoPlayer.currentTime += 10;
-      });
-    
-      videoPlayer.addEventListener("timeupdate", () => {
-        const progress = (videoPlayer.currentTime / videoPlayer.duration) * 100;
-        progressBar.value = progress;
-        currentTimeSpan.textContent = formatTime(videoPlayer.currentTime);
-      });
-    
-      videoPlayer.addEventListener("loadedmetadata", () => {
-        durationSpan.textContent = formatTime(videoPlayer.duration);
-      });
-    
-      progressBar.addEventListener("input", () => {
-        const newTime = (progressBar.value / 100) * videoPlayer.duration;
-        videoPlayer.currentTime = newTime;
-      });
-    
-      volumerBar.addEventListener("input", () => {
-        videoPlayer.volume = volumerBar.value / 100;
-      });
-    
-      function formatTime(seconds) {
-        const minutes = Math.floor(seconds / 60);
-        const secs = Math.floor(seconds % 60);
-        return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
-      }
-    }
+    await Promise.all(promises);
+    displayAlbum(myArtist);
+    displayTracks(traksArray);
+    heroArtist.style.setProperty(
+      "--my-var",
+      "url(" + myArtist.picture_xl + ")"
+    );
 
-    let sum
-    function visualizzaAltro(){
-        sum += 5
-        return sum
-    }
-    
-    
+    console.log("album appiattito", promises);
+  }
+
+  // const seeOther = document.getElementById('seeOther')
+  // seeOther.addEventListener('click', function (){
+  //     num += 5
+  //     loadAlbums(myId, num)
+  //     })
+  // Carica 10 album a partire dall'ID specificato
+  loadAlbums(myId, num);
+});
+const videoPlayer = document.getElementById("audioPlayer");
+const playPauseButton = document.getElementById("playPause");
+playPauseButton.addEventListener("click", () => {
+  if (videoPlayer.paused) {
+    videoPlayer.play();
+    playPauseButton.classList.remove("fa-play");
+    playPauseButton.classList.add("fa-pause");
+  } else {
+    videoPlayer.pause();
+    playPauseButton.classList.remove("fa-pause");
+    playPauseButton.classList.add("fa-play");
+  }
+});
+
+function playSong(index) {
+  document.getElementById('translateFoot').style = 'height:100px'
+  const backwardButton = document.getElementById("backward");
+  const forwardButton = document.getElementById("forward");
+  const progressBar = document.getElementById("progressBar");
+  //const currentTimeSpan = document.getElementById("currentTime");
+  //const durationSpan = document.getElementById("duration");
+  const volumerBar = document.getElementById("volumeBar");
+  videoPlayer.volume = volumerBar.value / 100;
+  const play = document.getElementById("play");
+  play.style.display = "block";
+  const imgPlayer = document.getElementById("imgPlayer");
+  imgPlayer.setAttribute("src", `${traksArray[index].album.cover_medium}`);
+  const artistPlayer = document.getElementById("artistPlayer");
+  artistPlayer.innerText = `${traksArray[index].artist.name}`;
+  const titlePlayer = document.getElementById('titlePlayer')
+  titlePlayer.innerText = `${traksArray[index].title}`
+
+  videoPlayer.innerHTML = `<source src = "${traksArray[index].preview}" type="audio/mp3"></source>`;
+  videoPlayer.setAttribute("autoplay", "");
+  videoPlayer.load();
+  playPauseButton.classList.remove("fa-play");
+  playPauseButton.classList.add("fa-pause");
+
+  backwardButton.addEventListener("click", () => {
+    videoPlayer.currentTime -= 10;
+  });
+
+  forwardButton.addEventListener("click", () => {
+    videoPlayer.currentTime += 10;
+  });
+
+  videoPlayer.addEventListener("timeupdate", () => {
+    const progress = (videoPlayer.currentTime / videoPlayer.duration) * 100;
+    progressBar.value = progress;
+   // currentTimeSpan.textContent = formatTime(videoPlayer.currentTime);
+  });
+
+  videoPlayer.addEventListener("loadedmetadata", () => {
+    //durationSpan.textContent = formatTime(videoPlayer.duration);
+  });
+
+  progressBar.addEventListener("input", () => {
+    const newTime = (progressBar.value / 100) * videoPlayer.duration;
+    videoPlayer.currentTime = newTime;
+  });
+
+  volumerBar.addEventListener("input", () => {
+    videoPlayer.volume = volumerBar.value / 100;
+  });
+
+  function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+  }
+}
+
+let sum;
+function visualizzaAltro() {
+  sum += 5;
+  return sum;
+}
