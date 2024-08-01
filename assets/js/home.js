@@ -191,7 +191,9 @@ searchButton.addEventListener('click', () => {
   searchInput.addEventListener('keyup', async (event) => {
     if (event.key === 'Enter') {
       const query = searchInput.value.trim();
+      console.log(query)
       if (query) {
+
         await loadAlbums(query, 6);
       }
     }
