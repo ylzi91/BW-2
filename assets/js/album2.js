@@ -1,3 +1,5 @@
+const spinner = document.getElementById("spinner")
+
 const traksArray = [];
 function goAlbum(id) {
   window.open(`./album2.html?myId=${id}`, "_blank");
@@ -10,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const heromobile = document.getElementById("hero-mobile");
   const hero = document.getElementById("hero");
   const brani = document.getElementById("brani");
-  const heromobile2 = document.getElementById("hero-mobile2");
+  const branimobile2 = document.getElementById("brani-mobile2");
 
   const startId = "rock"; // ID da cui iniziare
   const numberOfAlbums = 6;
@@ -42,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
                 <div class="flex-grow-1  pt-3">
                   <h2 class="m-0 p-1 fs-1">${nameAl.title}</h2>
-                  <p class="m-0 p-1 ">${nameAl.artist.name}</p>
+                  <a class="text-decoration-none text-white" href="./artist2.html?myId=${nameAl.artist.id}" target="_blank"> <p class="m-0 p-1 ">${nameAl.artist.name}</p></a>
                   <p class="m-0 p-1 fw-light gray">${nameAl.release_date}</p>
 
 
@@ -52,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <ul class=" p-0 m-0 d-flex ">
                   <li class="list-group-item">
 
-                    <span class="material-symbols-outlined fs-1 p-2 ps-0 ">
+                    <span class="material-symbols-outlined fs-1 p-2 ps-0 " id="heart-mobile" onclick="like()">
                       favorite
                     </span>
 
@@ -115,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
  
  `;
     brani.innerHTML = "";
-    heromobile2.innerHTML = "";
+    branimobile2.innerHTML = "";
     tracks.forEach((track, index) => {
       brani.innerHTML += `
             
@@ -129,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     
                   </div>
                   <div class="riga-titolo d-flex flex-column justify-content-center ">
-                    <p class="m-0 fw-light " onclick = "playSong(${index}, event)">${
+                    <p class="m-0 fw-light pointer" onclick = "playSong(${index}, event)">${
         track.title
       }</p>
                     <p class="m-0  fw-light gray ">${track.artist.name}</p>
@@ -146,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `;
 
-      heromobile2.innerHTML += `
+      branimobile2.innerHTML += `
             
 
 
@@ -154,8 +156,8 @@ document.addEventListener("DOMContentLoaded", () => {
        <div class="item col-12 col-md-12 ">
             <div class="navigation p-3 d-flex justify-content-between align-items-center">
               <div class="">
-                <p class="m-0 p-1 ">${track.title}</p>
-                <p class="m-0 p-1 fw-light gray ">${track.artist.name}</p>
+                <p class="m-0 p-1 " onclick = "playSong(${index}, event)">${track.title}</p>
+               <p class="m-0 p-1 fw-light gray ">${track.artist.name}</p>
               </div>
               <ul class=" m-0 d-flex ">
                 <li class="list-group-item">
@@ -177,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const promises = [];
 
     let currentId = startId;
-
+    spinner.classList.remove("d-none")
     promises.push(
       fetchAlbum(currentId).then((album) => {
         nameAlbum = album;
@@ -192,6 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
     await Promise.all(promises);
     console.log("album appiattito", promises);
     displayAlbum(nameAlbum, traksArray);
+    spinner.classList.add("d-none")
   }
 
   // Carica 10 album a partire dall'ID specificato
@@ -212,7 +215,7 @@ playPauseButton.addEventListener("click", () => {
 });
 
 function playSong(index) {
-  document.getElementById('translateFoot').style = 'height:100px'
+  
   const backwardButton = document.getElementById("backward");
   const forwardButton = document.getElementById("forward");
   const progressBar = document.getElementById("progressBar");
@@ -267,4 +270,21 @@ function playSong(index) {
     const secs = Math.floor(seconds % 60);
     return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
   }
+}
+
+
+function like () { 
+  const cuore =document.getElementById("heart")
+  const cuoreMobile =document.getElementById("heart-mobile")
+  console.log(cuore.style.color)
+  if (cuore.style.color==="rgb(29, 185, 84)"||cuoreMobile.style.color==="rgb(29, 185, 84)" ) {
+    cuore.style.color="white"
+    cuoreMobile.style.color="white"
+  }
+  else{cuore.style.color="rgb(29, 185, 84)"
+    cuoreMobile.style.color="rgb(29, 185, 84)"
+  }
+  
+  
+  
 }

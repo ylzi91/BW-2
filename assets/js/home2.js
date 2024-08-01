@@ -3,7 +3,7 @@
 
 
 
-
+const spinner = document.getElementById("spinner")
 
 
 
@@ -73,13 +73,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     albumContainer.innerHTML = "";
     albums.forEach((album) => {
-      // console.log(album);
+      console.log(album);
         albumContainer.innerHTML += `
                   
                     
                           <div class="albumSilente col-6 col-md-4  ">
               <div class="d-flex justify-content-center align-items-center gradient-card rounded div-card pointer" onclick = "goAlbum(${album.album.id})">
-                <img src="${album.album.cover_medium}" class="m-0  rounded-start card-img w-25 " />
+                <img src="${album.album.cover}" class="m-0  rounded-start card-img w-25 " />
                 <p class=" m-0 p-2 flex-grow-1"><a href = "./album2.html?myId=${album.album.id} " target = "_blank" class="text-decoration-none text-white"> ${album.album.title}</a></p>
               </div>
             </div>
@@ -98,22 +98,22 @@ document.addEventListener("DOMContentLoaded", () => {
                    <div onclick = "goAlbum(${itemList.album.id})" class="albumSilente col-6 col-lg-2 ">
               <div class="d-flex flex-column justify-content-center align-items-start gradient-card rounded div-card2 pointer">
                 <img src="${itemList.artist.picture_medium}" class="m-0  rounded w-100 card-img2 " />
-                <p class=" m-0 p-2 flex-grow-1"><a href = "./album2.html?myId=${itemList.album.id} " target = "_blank" class="text-decoration-none text-white"> ${itemList.album.title}</a></p>
+                <p class=" m-0 p-2 flex-grow-1"> ${itemList.album.title}</p>
               </div>
             </div>
                   `
                   list2.innerHTML += `
                    
-                   <div onclick = "goAlbum(${itemList.album.id})" class="item col-12 col-md-6 ">
+                   <div  class="item col-12 col-md-6 ">
               <div class="gradient-card rounded">
-                <div class=" d-sm-flex col-12 p-3 ">
-                  <img src="${itemList.artist.picture_medium}" class="m-0 img-fluid w-50  " />
+                <div class=" d-sm-flex col-12 p-3 " onclick = "goAlbum(${itemList.album.id})">
+                  <img src="${itemList.artist.picture_big}" class="m-0 img-fluid w-50  " />
                   <div class="play d-sm-none">
                     <span class="fa fa-play"></span>
                   </div>
                   <div class="flex-grow-1 ps-3">
-                    <p class="m-0 p-2 fw-light gray"><a href = "./artist2.html?myId=${itemList.artist.id} " target = "_blank" class="text-decoration-none gray">${itemList.artist.name}</a></p>
-                    <p class="m-0 p-2 "><a href = "./album2.html?myId=${itemList.album.id} " target = "_blank" class="text-decoration-none text-white"> ${itemList.album.title}</a></p>
+                    <p class="m-0 p-2 fw-light gray">${itemList.artist.name}</p>
+                    <p class="m-0 p-2 "> ${itemList.album.title}</p>
 
                   </div>
                 </div>
@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   <ul class=" p-0 m-0 d-flex ">
                     <li class="list-group-item">
 
-                      <span class="material-symbols-outlined fs-1 p-2">
+                      <span class="material-symbols-outlined fs-1 p-2" id="heart${itemList.album.id}"  onclick="like(${itemList.album.id})">
                         favorite
                       </span>
 
@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
         const btnPlay = document.getElementById('btnPlay')
         btnPlay.addEventListener('click', function (){
-            document.getElementById('translateFoot').style = 'height:100px'
+           
             const play = document.getElementById('play')
             play.style.display="block"
             const audioPlayer = document.getElementById('audioPlayer')
@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const albums = [];
     const promises = [];
     let currentId = startId;
-
+spinner.classList.remove("d-none")
     for (let i = 0; i < numberOfAlbums; i++) {
       promises.push(
         fetchAlbum(currentId).then((data) => {
@@ -201,8 +201,10 @@ document.addEventListener("DOMContentLoaded", () => {
     await Promise.all(promises);
     console.log("album appiattito", albums);
     displayAlbums(albums.flat().splice(0, 6), albums.flat().splice(7, 18), albums.flat().splice(17, 8));
-  }
 
+    spinner.classList.add("d-none")
+  }
+ 
   // Carica 10 album a partire dall'ID specificato
   loadAlbums(startId, numberOfAlbums);
 
@@ -273,7 +275,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-
+function like (id) { 
+  const cuore =document.getElementById("heart"+id)
+  console.log(cuore.style.color)
+  if (cuore.style.color==="rgb(29, 185, 84)") {
+    cuore.style.color="white"
+  }
+  else{cuore.style.color="rgb(29, 185, 84)"}
+  
+  
+  
+}
 
 
 
