@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   }</p></div>
                   <div class="riga-tempo d-flex justify-content-center align-items-center"> <p class="m-0 fw-light ">${Math.floor(
                     track.duration / 60
-                  )}:${Math.floor(track.duration % 60)}</p></div>
+                  )}:${Math.floor(track.duration % 60) < 10? "0" + Math.floor(track.duration % 60) : Math.floor(track.duration % 60)}</p></div>
 
                  
                 </div>

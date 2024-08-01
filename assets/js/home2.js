@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     
                           <div class="albumSilente col-6 col-md-4  ">
               <div class="d-flex justify-content-center align-items-center gradient-card rounded div-card pointer" onclick = "goAlbum(${album.album.id})">
-                <img src="${album.album.cover_small}" class="m-0  rounded-start card-img w-25 " />
+                <img src="${album.album.cover_medium}" class="m-0  rounded-start card-img w-25 " />
                 <p class=" m-0 p-2 flex-grow-1"><a href = "./album2.html?myId=${album.album.id} " target = "_blank" class="text-decoration-none text-white"> ${album.album.title}</a></p>
               </div>
             </div>
