@@ -241,4 +241,95 @@ sfondomobile.style.backgroundImage=`url(${
       loadAlbums(myId, num);
     
 })
+
+const videoPlayer = document.getElementById("audioPlayer");
+    const playPauseButton = document.getElementById("playPause");
+    
+    playPauseButton.addEventListener("click", function (e) {
+      console.log(videoPlayer.paused);
+      if (videoPlayer.paused) {
+        e.preventDefault();
+        console.log("entra per play");
+        videoPlayer.play();
+        playPauseButton.classList.remove("fa-play");
+        playPauseButton.classList.add("fa-pause");
+      } else {
+        e.preventDefault();
+        console.log("entra per pausa");
+        videoPlayer.pause();
+        playPauseButton.classList.remove("fa-pause");
+        playPauseButton.classList.add("fa-play");
+      }
+    });
+
+    
+
+    function playSong(index, e) {
+      e.preventDefault();
+    
+      const backwardButton = document.getElementById("backward");
+      const forwardButton = document.getElementById("forward");
+      const progressBar = document.getElementById("progressBar");
+      const currentTimeSpan = document.getElementById("currentTime");
+      const durationSpan = document.getElementById("duration");
+      const volumerBar = document.getElementById("volumeBar");
+      videoPlayer.volume = volumerBar.value / 100;
+    
+      const footer = document.getElementsByTagName("footer")[0];
+      footer.classList.remove("hidden");
+      const imgPlayer = document.getElementById("imgPlayer");
+      imgPlayer.setAttribute("src", `${traksArray[index].album.cover_small}`);
+      const titlePlayer = document.getElementById("titlePlayer");
+      titlePlayer.innerText = `${traksArray[index].title}`;
+    
+      const artistPlayer = document.getElementById("artistPlayer");
+      artistPlayer.innerText = `${traksArray[index].artist.name}`;
+    
+      videoPlayer.innerHTML = `<source src = "${traksArray[index].preview}" type="audio/mp3"></source>`;
+      videoPlayer.load();
+      videoPlayer.play();
+      playPauseButton.classList.remove("fa-play");
+      playPauseButton.classList.add("fa-pause");
+    
+    
+      backwardButton.addEventListener("click", () => {
+        videoPlayer.currentTime -= 10;
+      });
+    
+      forwardButton.addEventListener("click", () => {
+        videoPlayer.currentTime += 10;
+      });
+    
+      videoPlayer.addEventListener("timeupdate", () => {
+        const progress = (videoPlayer.currentTime / videoPlayer.duration) * 100;
+        progressBar.value = progress;
+        currentTimeSpan.textContent = formatTime(videoPlayer.currentTime);
+      });
+    
+      videoPlayer.addEventListener("loadedmetadata", () => {
+        durationSpan.textContent = formatTime(videoPlayer.duration);
+      });
+    
+      progressBar.addEventListener("input", () => {
+        const newTime = (progressBar.value / 100) * videoPlayer.duration;
+        videoPlayer.currentTime = newTime;
+      });
+    
+      volumerBar.addEventListener("input", () => {
+        videoPlayer.volume = volumerBar.value / 100;
+      });
+    
+      function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+      }
+    }
+
+    let sum
+    function visualizzaAltro(){
+        sum += 5
+        return sum
+    }
+    
     
