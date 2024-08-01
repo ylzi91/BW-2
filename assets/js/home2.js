@@ -154,8 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   
                  `
         })
-        document.body.style.height = 'auto';
-        document.body.style.height = '100vh';
+        
     
         const btnPlay = document.getElementById('btnPlay')
         btnPlay.addEventListener('click', function (){

@@ -1,5 +1,5 @@
 
-
+const spinner = document.getElementById("spinner")
 const searchInput = document.getElementById('searchInput')
 const riga =document.getElementById("riga")
 const riga2 =document.getElementById("riga2")
@@ -118,7 +118,7 @@ function fetchAlbum(id) {
 async function loadAlbums(query, numberOfAlbums) {
     const albums = [];
     const promises = [];
-    
+    spinner.classList.remove("d-none")
 
     for (let i = 0; i < numberOfAlbums; i++) {
       promises.push(
@@ -133,7 +133,7 @@ async function loadAlbums(query, numberOfAlbums) {
     console.log("album appiattito", albums);
    
       displayAlbums(albums.flat().splice(0, numberOfAlbums));
-    
+      spinner.classList.add("d-none")
   }
   searchInput.addEventListener('keyup', async (event) => {
     if (event.key === 'Enter') {
