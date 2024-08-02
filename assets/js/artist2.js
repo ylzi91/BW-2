@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
  <div class="col-12 p-1">
-                <div class="navigation  d-flex justify-content-between align-items-center">
+                <div onclick = "playSong(${index}, event)" class="navigation  d-flex justify-content-between align-items-center overgray pointer">
                   <div class="riga-numero2 d-flex justify-content-center align-items-center ">
                     <p class="m-0 fw-light ">${index + 1}</p>
                     
@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <img src="${track.album.cover_small}" class="img-fluid">
                   </div>
                   <div class="riga-titolo2 d-flex flex-column justify-content-center ">
-                    <p onclick = "playSong(${index}, event)" class="m-0 fw-light ps-3 pointer ">${track.title}</p>
+                    <p onclick = "playSong(${index}, event)" class="m-0 fw-light ps-3 ">${track.title}</p>
                      <p class="m-0 fw-light ps-3 gray ">${nomi}</p>
                    
                   </div>
@@ -223,6 +223,27 @@ document.addEventListener("DOMContentLoaded", () => {
     await Promise.all(promises);
     displayAlbum(myArtist);
     displayTracks(traksArray);
+
+    const cuore = document.getElementById("heart-artist");
+    const cuoreMobile = document.getElementById("heart-mobile");
+    console.log(
+      "GETITEM",
+      localStorage.getItem(`BraniLike${traksArray[0].album.title}`)
+    );
+
+
+    if (localStorage.getItem(`BraniLike${traksArray[0].album.title}`)) {
+      cuore.style.color = "rgb(29, 185, 84)";
+      cuoreMobile.style.color = "rgb(29, 185, 84)";
+    }
+
+    spinner.classList.add("d-none");
+  
+
+    
+
+
+
     heroArtist.style.setProperty(
       "--my-var",
       "url(" + myArtist.picture_xl + ")"
@@ -339,18 +360,53 @@ function playSong(index) {
 
 
 
-function like () { 
-  const cuore =document.getElementById("heart-artist")
-  const cuoreMobile =document.getElementById("heart-mobile")
-  console.log(cuore.style.color)
-  if (cuore.style.color==="rgb(29, 185, 84)"||cuoreMobile.style.color==="rgb(29, 185, 84)" ) {
-    cuore.style.color="white"
-    cuoreMobile.style.color="white"
+function like() {
+  const cuore = document.getElementById("heart-artist");
+  const cuoreMobile = document.getElementById("heart-mobile");
+ 
+  if (
+    cuore.style.color === "rgb(29, 185, 84)" ||
+    cuoreMobile.style.color === "rgb(29, 185, 84)"
+  ) {
+    cuore.style.color = "white";
+    cuoreMobile.style.color = "white";
+    localStorage.removeItem(`BraniLike${traksArray[0].album.title}`);
+  } else {
+    cuore.style.color = "rgb(29, 185, 84)";
+    cuoreMobile.style.color = "rgb(29, 185, 84)";
+    localStorage.setItem(`BraniLike${traksArray[0].album.title}`,
+      JSON.stringify(traksArray)
+    );
   }
-  else{cuore.style.color="rgb(29, 185, 84)"
-    cuoreMobile.style.color="rgb(29, 185, 84)"
+}
+  
+  
+  
+
+
+function loadLikedTrack() {
+
+  const arrayTrack = []
+  const brLike = document.getElementById('brLike')
+  if(brLike.classList.contains('d-none')){
+    brLike.classList.add('d-block')
+    brLike.classList.remove('d-none')
+  } else if (brLike.classList.contains('d-block')){
+    brLike.classList.add('d-none')
+    brLike.classList.remove('d-block')
   }
-  
-  
-  
+  let keys = Object.keys(localStorage);
+  console.log('lolllooldkoewdkwe', keys)
+  for(let key of keys) {
+     console.log('keyarray' ,JSON.parse(localStorage.getItem(key)));
+     arrayTrack.push(JSON.parse(localStorage.getItem(key)))
+
+  }
+  const arrayTrackFlat = arrayTrack.flat()
+  console.log('ARRAYTRACCCCK', arrayTrackFlat)
+  brLike.innerHTML = ''
+  arrayTrackFlat.forEach((track, index) => {
+    console.log('conta')
+    brLike.innerHTML += `<p>${track.title}</p>`
+  })
 }

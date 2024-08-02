@@ -1,4 +1,4 @@
-const spinner = document.getElementById("spinner")
+const spinner = document.getElementById("spinner");
 
 const traksArray = [];
 function goAlbum(id) {
@@ -125,15 +125,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             <div class="col-12">
-                <div class="navigation  d-flex justify-content-between align-items-center">
+                <div onclick = "playSong(${index})" class="navigation  d-flex justify-content-between align-items-center pointer overgray">
                   <div class="riga-numero d-flex justify-content-center align-items-center ">
                     <p class="m-0 fw-light ">${index + 1}</p>
                     
                   </div>
                   <div class="riga-titolo d-flex flex-column justify-content-center ">
-                    <p class="m-0 fw-light pointer" onclick = "playSong(${index}, event)">${
-        track.title
-      }</p>
+                    <p class="m-0 fw-light pointer" >${track.title}</p>
                     <p class="m-0  fw-light gray ">${track.artist.name}</p>
                   </div>
                   <div class="riga-rip d-flex justify-content-end align-items-center"> <p class="m-0 fw-light ">${
@@ -141,7 +139,11 @@ document.addEventListener("DOMContentLoaded", () => {
                   }</p></div>
                   <div class="riga-tempo d-flex justify-content-center align-items-center"> <p class="m-0 fw-light ">${Math.floor(
                     track.duration / 60
-                  )}:${Math.floor(track.duration % 60) < 10? "0" + Math.floor(track.duration % 60) : Math.floor(track.duration % 60)}</p></div>
+                  )}:${
+        Math.floor(track.duration % 60) < 10
+          ? "0" + Math.floor(track.duration % 60)
+          : Math.floor(track.duration % 60)
+      }</p></div>
 
                  
                 </div>
@@ -179,7 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const promises = [];
 
     let currentId = startId;
-    spinner.classList.remove("d-none")
+    spinner.classList.remove("d-none");
     promises.push(
       fetchAlbum(currentId).then((album) => {
         nameAlbum = album;
@@ -194,7 +196,24 @@ document.addEventListener("DOMContentLoaded", () => {
     await Promise.all(promises);
     console.log("album appiattito", promises);
     displayAlbum(nameAlbum, traksArray);
-    spinner.classList.add("d-none")
+
+
+
+
+    const cuore = document.getElementById("heart");
+    const cuoreMobile = document.getElementById("heart-mobile");
+    console.log(
+      "GETITEM",
+      localStorage.getItem(`BraniLike${traksArray[0].album.title}`)
+    );
+
+
+    if (localStorage.getItem(`BraniLike${traksArray[0].album.title}`)) {
+      cuore.style.color = "rgb(29, 185, 84)";
+      cuoreMobile.style.color = "rgb(29, 185, 84)";
+    }
+
+    spinner.classList.add("d-none");
   }
 
   // Carica 10 album a partire dall'ID specificato
@@ -215,7 +234,6 @@ playPauseButton.addEventListener("click", () => {
 });
 
 function playSong(index) {
-  
   const backwardButton = document.getElementById("backward");
   const forwardButton = document.getElementById("forward");
   const progressBar = document.getElementById("progressBar");
@@ -229,8 +247,8 @@ function playSong(index) {
   imgPlayer.setAttribute("src", `${traksArray[index].album.cover_medium}`);
   const artistPlayer = document.getElementById("artistPlayer");
   artistPlayer.innerText = `${traksArray[index].artist.name}`;
-  const titlePlayer = document.getElementById('titlePlayer')
-  titlePlayer.innerText = `${traksArray[index].title}`
+  const titlePlayer = document.getElementById("titlePlayer");
+  titlePlayer.innerText = `${traksArray[index].title}`;
 
   videoPlayer.innerHTML = `<source src = "${traksArray[index].preview}" type="audio/mp3"></source>`;
   videoPlayer.setAttribute("autoplay", "");
@@ -253,7 +271,7 @@ function playSong(index) {
   });
 
   videoPlayer.addEventListener("loadedmetadata", () => {
-   // durationSpan.textContent = formatTime(videoPlayer.duration);
+    // durationSpan.textContent = formatTime(videoPlayer.duration);
   });
 
   progressBar.addEventListener("input", () => {
@@ -273,18 +291,49 @@ function playSong(index) {
 }
 
 
-function like () { 
-  const cuore =document.getElementById("heart")
-  const cuoreMobile =document.getElementById("heart-mobile")
-  console.log(cuore.style.color)
-  if (cuore.style.color==="rgb(29, 185, 84)"||cuoreMobile.style.color==="rgb(29, 185, 84)" ) {
-    cuore.style.color="white"
-    cuoreMobile.style.color="white"
+function like() {
+  const cuore = document.getElementById("heart");
+  const cuoreMobile = document.getElementById("heart-mobile");
+  console.log(cuore.style.color);
+  if (
+    cuore.style.color === "rgb(29, 185, 84)" ||
+    cuoreMobile.style.color === "rgb(29, 185, 84)"
+  ) {
+    cuore.style.color = "white";
+    cuoreMobile.style.color = "white";
+    localStorage.removeItem(`BraniLike${traksArray[0].album.title}`);
+  } else {
+    cuore.style.color = "rgb(29, 185, 84)";
+    cuoreMobile.style.color = "rgb(29, 185, 84)";
+    localStorage.setItem(`BraniLike${traksArray[0].album.title}`,
+      JSON.stringify(traksArray)
+    );
   }
-  else{cuore.style.color="rgb(29, 185, 84)"
-    cuoreMobile.style.color="rgb(29, 185, 84)"
+}
+
+function loadLikedTrack() {
+
+  const arrayTrack = []
+  const brLike = document.getElementById('brLike')
+  if(brLike.classList.contains('d-none')){
+    brLike.classList.add('d-block')
+    brLike.classList.remove('d-none')
+  } else if (brLike.classList.contains('d-block')){
+    brLike.classList.add('d-none')
+    brLike.classList.remove('d-block')
   }
-  
-  
-  
+  let keys = Object.keys(localStorage);
+  console.log('lolllooldkoewdkwe', keys)
+  for(let key of keys) {
+     console.log('keyarray' ,JSON.parse(localStorage.getItem(key)));
+     arrayTrack.push(JSON.parse(localStorage.getItem(key)))
+
+  }
+  const arrayTrackFlat = arrayTrack.flat()
+  console.log('ARRAYTRACCCCK', arrayTrackFlat)
+  brLike.innerHTML = ''
+  arrayTrackFlat.forEach((track, index) => {
+    console.log('conta')
+    brLike.innerHTML += `<p>${track.title}</p>`
+  })
 }

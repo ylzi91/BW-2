@@ -85,6 +85,7 @@
               align-items: center;
               gap: 1.5em;
               color: var(--secondary-color);
+  
           }
           .control-buttons{
               display: flex;
@@ -97,6 +98,7 @@
               background-color: var(--primary-color);
               color: #111;
               border-radius: 50%;
+              cursor: pointer;
           }
           .play-pause:hover{
               transform: scale(1.1);
@@ -119,6 +121,7 @@
             outline: none; /* Rimuove il bordo esterno */
             border-radius: 5px; /* Bordo arrotondato */
             overflow: hidden; /* Nasconde il contenuto che supera i bordi */
+            cursor: pointer;
           }
           
           .custom-volume-bar{
@@ -127,7 +130,8 @@
             background: #ccc; /* Colore dello sfondo grigio */
             outline: none; /* Rimuove il bordo esterno */
             border-radius: 5px; /* Bordo arrotondato */
-            overflow: hidden; /
+            overflow: hidden; 
+            cursor: pointer;
           
           }
           

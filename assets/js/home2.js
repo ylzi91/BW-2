@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   
                     
                           <div class="albumSilente col-6 col-md-4  ">
-              <div class="d-flex justify-content-center align-items-center gradient-card rounded div-card pointer" onclick = "goAlbum(${album.album.id})">
+              <div class="d-flex justify-content-center align-items-center gradient-card rounded div-card pointer zoom" onclick = "goAlbum(${album.album.id})">
                 <img src="${album.album.cover}" class="m-0  rounded-start card-img w-25 " />
                 <p class=" m-0 p-2 flex-grow-1"><a href = "./album2.html?myId=${album.album.id} " class="text-decoration-none text-white"> ${album.album.title}</a></p>
               </div>
@@ -96,8 +96,8 @@ document.addEventListener("DOMContentLoaded", () => {
                    
                   
                    <div onclick = "goAlbum(${itemList.album.id})" class="albumSilente col-6 col-lg-2 ">
-              <div class="d-flex flex-column justify-content-center align-items-start gradient-card rounded div-card2 pointer">
-                <img src="${itemList.artist.picture_medium}" class="m-0  rounded w-100 card-img2 " />
+              <div class="d-flex flex-column justify-content-center align-items-start gradient-card rounded div-card2 pointer zoom">
+                <img src="${itemList.album.cover_medium}" class="m-0  rounded w-100 card-img2 " />
                 <p class=" m-0 p-2 flex-grow-1"> ${itemList.album.title}</p>
               </div>
             </div>
@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   }
 
-  async function loadAlbums(startId, numberOfAlbums) {
+  async function loadAlbums(startId) {
     const albums = [];
     const promises = [];
     let currentId = startId;
@@ -273,16 +273,31 @@ spinner.classList.remove("d-none")
 
 });
 
-function like (id) { 
-  const cuore =document.getElementById("heart"+id)
-  console.log(cuore.style.color)
-  if (cuore.style.color==="rgb(29, 185, 84)") {
-    cuore.style.color="white"
+function loadLikedTrack() {
+
+  const arrayTrack = []
+  const brLike = document.getElementById('brLike')
+  if(brLike.classList.contains('d-none')){
+    brLike.classList.add('d-block')
+    brLike.classList.remove('d-none')
+  } else if (brLike.classList.contains('d-block')){
+    brLike.classList.add('d-none')
+    brLike.classList.remove('d-block')
   }
-  else{cuore.style.color="rgb(29, 185, 84)"}
-  
-  
-  
+  let keys = Object.keys(localStorage);
+  console.log('lolllooldkoewdkwe', keys)
+  for(let key of keys) {
+     console.log('keyarray' ,JSON.parse(localStorage.getItem(key)));
+     arrayTrack.push(JSON.parse(localStorage.getItem(key)))
+
+  }
+  const arrayTrackFlat = arrayTrack.flat()
+  console.log('ARRAYTRACCCCK', arrayTrackFlat)
+  brLike.innerHTML = ''
+  arrayTrackFlat.forEach((track, index) => {
+    console.log('conta')
+    brLike.innerHTML += `<p>${track.title}</p>`
+  })
 }
 
 

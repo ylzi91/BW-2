@@ -78,7 +78,7 @@ function fetchAlbum(id) {
         riga.innerHTML += `
                   
                       <div class="albumSilente col-6 col-md-4 col-xl-3 ">
-                        <div class="d-flex flex-column justify-content-center align-items-center mb-5 rounded position-relative pointer ">
+                        <div class="d-flex flex-column justify-content-center align-items-center mb-5 rounded position-relative pointer zoom">
                        <a href = "./artist2.html?myId=${artist.artist.id} " class="text-decoration-none text-white"><img src="${artist.artist.picture_medium}" class="m-0 img-fluid rounded">    
                        </a>
                        <label>${artist.artist.name}</label>
@@ -93,7 +93,7 @@ function fetchAlbum(id) {
           riga2.innerHTML += `
                     
                         <div class="albumSilente col-6 col-md-4 col-xl-3 ">
-                          <div class="d-flex flex-column justify-content-center align-items-center mb-5 rounded position-relative pointer ">
+                          <div class="d-flex flex-column justify-content-center align-items-center mb-5 rounded position-relative pointer zoom">
                          <a href = "./album2.html?myId=${album.album.id} " class="text-decoration-none text-white"><img src="${album.album.cover_medium}" class="m-0 img-fluid rounded">    
                          </a>
                          <label>${album.album.title}</label>
@@ -158,4 +158,4 @@ async function loadAlbums(query, numberOfAlbums) {
 
   });
 
-  loadAlbums('pop', 12)
+  loadAlbums('all', 12)

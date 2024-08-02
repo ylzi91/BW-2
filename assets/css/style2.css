@@ -23,6 +23,23 @@
     list-style: none;
    
   }
+
+  .zoom:hover {
+    transition-property: transform;
+    transform: scale(1.1);
+    transition-duration: 0.2s;
+  }
+
+  .max-height{
+    max-height: 200px;
+    overflow: scroll;
+  }
+
+  .overgray:hover{
+    transition-property: background-color;
+    background-color: #1ab26b5f;
+    transition-duration: 0.2s;
+  }
   
   .navigation ul li a {
     color: #b3b3b3;
