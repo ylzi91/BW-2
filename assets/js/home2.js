@@ -8,10 +8,10 @@ const spinner = document.getElementById("spinner")
 
 
     function goAlbum(id){
-      window.open(`./album2.html?myId=${id}`, '_blank')
+      window.location.href = `./album2.html?myId=${id}`
     }
     function goArtist(id){
-      window.open(`./artist2.html?myId=${id}`, '_blank')
+      window.location.href = `./artist2.html?myId=${id}`
     }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -54,12 +54,12 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log('albumindex',albums[indexRand])
 
     hero.innerHTML = ` <div class="heroImg">
-           <a href = "./album2.html?myId=${albums[indexRand].album.id} " target = "_blank">  <img src="${albums[indexRand].album.cover_medium}" alt="" /> </a>
+           <a href = "./album2.html?myId=${albums[indexRand].album.id} ">  <img src="${albums[indexRand].album.cover_medium}" alt="" /> </a>
           </div>
           <div class="p-2 hero-content">
             <p class="m-0 p-2">Album</p>
-           <a class="text-decoration-none text-white"  href = "./album2.html?myId=${albums[indexRand].album.id}" target = "_blank"> <h1 class="m-0 p-2">${albums[indexRand].title}</h1></a>
-           <a class="text-decoration-none text-white"  href = "./artist2.html?myId=${albums[indexRand].artist.id}" target = "_blank"> <p class="m-0 p-2">${albums[indexRand].artist.name}</p></a>
+           <a class="text-decoration-none text-white"  href = "./album2.html?myId=${albums[indexRand].album.id}"> <h1 class="m-0 p-2">${albums[indexRand].title}</h1></a>
+           <a class="text-decoration-none text-white"  href = "./artist2.html?myId=${albums[indexRand].artist.id}"> <p class="m-0 p-2">${albums[indexRand].artist.name}</p></a>
             <p class="m-0 p-2"  >Ascoltalo subbbbbito</p>
             <div class="m-0 p-2 d-flex justify-content-between">
               <div class="d-grid gap-2 d-md-block">
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
                           <div class="albumSilente col-6 col-md-4  ">
               <div class="d-flex justify-content-center align-items-center gradient-card rounded div-card pointer" onclick = "goAlbum(${album.album.id})">
                 <img src="${album.album.cover}" class="m-0  rounded-start card-img w-25 " />
-                <p class=" m-0 p-2 flex-grow-1"><a href = "./album2.html?myId=${album.album.id} " target = "_blank" class="text-decoration-none text-white"> ${album.album.title}</a></p>
+                <p class=" m-0 p-2 flex-grow-1"><a href = "./album2.html?myId=${album.album.id} " class="text-decoration-none text-white"> ${album.album.title}</a></p>
               </div>
             </div>
                       `;
@@ -188,14 +188,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const promises = [];
     let currentId = startId;
 spinner.classList.remove("d-none")
-    for (let i = 0; i < numberOfAlbums; i++) {
       promises.push(
         fetchAlbum(currentId).then((data) => {
             albums.push(data.data);
           
         })
       );
-    }
+    
 
     await Promise.all(promises);
     console.log("album appiattito", albums);
@@ -205,7 +204,7 @@ spinner.classList.remove("d-none")
   }
  
   // Carica 10 album a partire dall'ID specificato
-  loadAlbums(startId, numberOfAlbums);
+  loadAlbums(startId);
 
 
 
