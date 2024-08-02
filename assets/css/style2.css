@@ -3,14 +3,24 @@
     margin: 0;
     box-sizing: border-box;
   }
-
-  
+html, body {padding: 0;
+margin: 0;}
+  html {min-height: 100%;;
+  display: flex;
+flex-direction: column;}
 
   body {
     color: white;
     font-family: "Circular" !important;
-    
+    display: flex;
+    flex: 1;
+    flex-direction: column;
   }
+  .container-fluid {flex: 1;
+  display: flex;
+flex-direction: column;}
+.row {flex: 1;
+display: flex;}
 
   .pointer {
     cursor: pointer;
