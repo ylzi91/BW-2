@@ -79,7 +79,7 @@ function fetchAlbum(id) {
                   
                       <div class="albumSilente col-6 col-md-4 col-xl-3 ">
                         <div class="d-flex flex-column justify-content-center align-items-center mb-5 rounded position-relative pointer ">
-                       <a href = "./artist2.html?myId=${artist.artist.id} " target = "_blank" class="text-decoration-none text-white"><img src="${artist.artist.picture_medium}" class="m-0 img-fluid rounded">    
+                       <a href = "./artist2.html?myId=${artist.artist.id} " class="text-decoration-none text-white"><img src="${artist.artist.picture_medium}" class="m-0 img-fluid rounded">    
                        </a>
                        <label>${artist.artist.name}</label>
                         </div>
@@ -94,7 +94,7 @@ function fetchAlbum(id) {
                     
                         <div class="albumSilente col-6 col-md-4 col-xl-3 ">
                           <div class="d-flex flex-column justify-content-center align-items-center mb-5 rounded position-relative pointer ">
-                         <a href = "./album2.html?myId=${album.album.id} " target = "_blank" class="text-decoration-none text-white"><img src="${album.album.cover_medium}" class="m-0 img-fluid rounded">    
+                         <a href = "./album2.html?myId=${album.album.id} " class="text-decoration-none text-white"><img src="${album.album.cover_medium}" class="m-0 img-fluid rounded">    
                          </a>
                          <label>${album.album.title}</label>
                           </div>
@@ -120,14 +120,13 @@ async function loadAlbums(query, numberOfAlbums) {
     const promises = [];
     spinner.classList.remove("d-none")
 
-    for (let i = 0; i < numberOfAlbums; i++) {
+
       promises.push(
         fetchAlbum(query).then((data) => {
             albums.push(data.data);
           
         })
       );
-    }
 
     await Promise.all(promises);
     console.log("album appiattito", albums);
@@ -139,6 +138,19 @@ async function loadAlbums(query, numberOfAlbums) {
     if (event.key === 'Enter') {
       const query = searchInput.value.trim();
       if (query) {
+        if (query === 'pupo'){
+          
+          const promises = [];
+          promises.push(
+            fetchAlbum(query).then((data) => {
+              pupoId = data.data[0].artist.id
+              console.log ('PupoID' , pupoId)
+              
+            })
+          )
+          await Promise.all(promises)
+          window.open(`./artist2.html?myId=${pupoId}`)
+        }
         await loadAlbums(query, 12);
       }
     }

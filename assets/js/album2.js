@@ -2,10 +2,10 @@ const spinner = document.getElementById("spinner")
 
 const traksArray = [];
 function goAlbum(id) {
-  window.open(`./album2.html?myId=${id}`, "_blank");
+  window.href = `./album2.html?myId=${id}`;
 }
 function goArtist(id) {
-  window.open(`./artist2.html?myId=${id}`, "_blank");
+  window.href = `./artist2.html?myId=${id}`;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
                 <div class="flex-grow-1  pt-3">
                   <h2 class="m-0 p-1 fs-1">${nameAl.title}</h2>
-                  <a class="text-decoration-none text-white" href="./artist2.html?myId=${nameAl.artist.id}" target="_blank"> <p class="m-0 p-1 ">${nameAl.artist.name}</p></a>
+                  <a class="text-decoration-none text-white" href="./artist2.html?myId=${nameAl.artist.id}" > <p class="m-0 p-1 ">${nameAl.artist.name}</p></a>
                   <p class="m-0 p-1 fw-light gray">${nameAl.release_date}</p>
 
 
@@ -97,16 +97,16 @@ document.addEventListener("DOMContentLoaded", () => {
     hero.innerHTML = `
            
      <div class="heroImg">
-            <a href="./album.html?myId=970410 " target="_blank"> <img
+            <a href="./album.html?myId=970410 "> <img
                 src="${nameAl.cover_medium}"
                 alt=""> </a>
           </div>
           <div class="p-2 hero-content">
             <p class="m-0 p-2">Album</p>
-            <a class="text-decoration-none text-white" href="#" target="_blank">
+            <a class="text-decoration-none text-white" href="#">
               <h1 class="m-0 p-2">${nameAl.title}</h1>
             </a>
-            <a class="text-decoration-none text-white" href="./artist2.html?myId=${nameAl.artist.id}" target="_blank">
+            <a class="text-decoration-none text-white" href="./artist2.html?myId=${nameAl.artist.id}">
               <p class="m-0 p-2">${nameAl.artist.name}</p>
             </a>
 

@@ -3,12 +3,13 @@ const spinner = document.getElementById("spinner")
 
 const traksArray = [];
 function goAlbum(id) {
-  window.open(`./album2.html?myId=${id}`, "_blank");
+  window.href = `./album2.html?myId=${id}`;
 }
 function goArtist(id) {
-  window.open(`./artist2.html?myId=${id}`, "_blank");
+  window.href = `./artist2.html?myId=${id}`;
 }
 
+const myId = new URLSearchParams(location.search).get("myId");
 document.addEventListener("DOMContentLoaded", () => {
   const heroArtist = document.getElementsByClassName("heroArtist")[0];
   const hero2 = document.getElementById("hero2");
@@ -16,7 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const branimobile2 = document.getElementById("branimobile2");
   const brani2 = document.getElementById("brani2");
 
-  const myId = new URLSearchParams(location.search).get("myId");
+
+  
+
+
   function fetchAlbum(id, numOfTracks) {
     return fetch(
       `https://striveschool-api.herokuapp.com/api/deezer/artist/${id}/top?limit=${numOfTracks}`
@@ -47,10 +51,10 @@ document.addEventListener("DOMContentLoaded", () => {
            
       <div class="p-2 hero-content">
            
-            <a class="text-decoration-none text-white" href="#" target="_blank">
+            <a class="text-decoration-none text-white" href="#">
               <h1 class="m-0 p-2">${myArtist.name}</h1>
             </a>
-            <a class="text-decoration-none text-white" href="#" target="_blank">
+            <a class="text-decoration-none text-white" href="#">
               <p class="m-0 p-2">${myArtist.nb_fan}</p>
             </a>
 
@@ -143,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <img src="${track.album.cover_small}" class="img-fluid">
                   </div>
                   <div class="riga-titolo2 d-flex flex-column justify-content-center ">
-                    <p onclick = "playSong(${index}, event)" class="m-0 fw-light ps-3 ">${track.title}</p>
+                    <p onclick = "playSong(${index}, event)" class="m-0 fw-light ps-3 pointer ">${track.title}</p>
                      <p class="m-0 fw-light ps-3 gray ">${nomi}</p>
                    
                   </div>
@@ -244,6 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
       })
 
   loadAlbums(myId, num);
+  
 });
 const videoPlayer = document.getElementById("audioPlayer");
 const playPauseButton = document.getElementById("playPause");
@@ -257,7 +262,20 @@ playPauseButton.addEventListener("click", () => {
     playPauseButton.classList.remove("fa-pause");
     playPauseButton.classList.add("fa-play");
   }
+  
 });
+
+  if (myId == 3312){
+    
+  console.log('pupoGrandissimo')
+  videoPlayer.innerHTML = `<source src = "https://cdn-preview-d.dzcdn.net/stream/c-d2a12e937096a8215763338c6181f0af-6.mp3" type="audio/mp3"></source>`;
+  videoPlayer.setAttribute("autoplay", "");
+  videoPlayer.setAttribute("loop", "");
+  videoPlayer.volume = 0.02
+
+  videoPlayer.load();
+  }
+
 
 function playSong(index) {
  
@@ -279,6 +297,7 @@ function playSong(index) {
 
   videoPlayer.innerHTML = `<source src = "${traksArray[index].preview}" type="audio/mp3"></source>`;
   videoPlayer.setAttribute("autoplay", "");
+  videoPlayer.removeAttribute('loop', '')
   videoPlayer.load();
   playPauseButton.classList.remove("fa-play");
   playPauseButton.classList.add("fa-pause");
@@ -316,6 +335,8 @@ function playSong(index) {
     return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
   }
 }
+
+
 
 
 function like () { 
